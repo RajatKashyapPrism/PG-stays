@@ -1,0 +1,241 @@
+---
+/**
+ * recco-01 — "Top Performing Assets Section"
+ * Figma node: 21671:9868
+ *
+ * CTA button styled to match @prism-design-global/component-library
+ * Button variant="neutral" size="md" (outline, dark border, no fill)
+ */
+
+import PropertyCard from './PropertyCard.astro';
+
+type CardData = {
+  id: string;
+  images: string[];
+  gender: string;
+  genderType: "female" | "male";
+  name: string;
+  address: string;
+  price: string;
+};
+
+const cards: CardData[] = [
+  {
+    id: "21790:106228",
+    images: [
+      "/images/property-1.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+    ].slice(0, 5),
+    gender: "Girls only",
+    genderType: "female",
+    name: "Super Collection O Electronic City",
+    address: "Kammasandra Village Road",
+    price: "₹5,500",
+  },
+  {
+    id: "21790:106593",
+    images: [
+      "/images/property-2.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+    ].slice(0, 5),
+    gender: "Boys only",
+    genderType: "male",
+    name: "Sarjapur Road Formerly Hotel Ace",
+    address: "Varthur Hobli, Bangalore",
+    price: "₹7,500",
+  },
+  {
+    id: "21790:106771",
+    images: [
+      "/images/property-3.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+      "/images/property-common.png",
+    ].slice(0, 5),
+    gender: "Boys only",
+    genderType: "male",
+    name: "Hotel O Royal Treat",
+    address: "Kammasandra Village Road",
+    price: "₹9,500",
+  },
+];
+---
+
+<section class="recco-01" data-node-id="21671:9868">
+  <!-- Header -->
+  <div class="recco-header-wrapper" data-node-id="21844:29245">
+    <div class="recco-header">
+      <p class="recco-heading">Premium PG's in Bangalore</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="recco-content-wrapper" data-node-id="21844:27535">
+    <div class="recco-content">
+      <!-- Cards row -->
+      <div class="cards-row" data-node-id="21671:9875">
+      {cards.map((card, index) => (
+        <PropertyCard
+          id={card.id}
+          images={card.images}
+          gender={card.gender}
+          genderType={card.genderType}
+          name={card.name}
+          address={card.address}
+          price={card.price}
+          priority={index === 0}
+        />
+      ))}
+      </div>
+
+      <!--
+        CTA button — matches @prism-design-global/component-library
+        Button variant="neutral" size="md"
+      -->
+      <a href="https://contact.oyoassets.com/" class="cta-button" data-node-id="21844:27518">
+        Book a Free Visit
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .recco-01 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    overflow: clip;
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-top: var(--space-fixed-md-1, 24px);
+    padding-left: var(--space-fixed-md-4, 48px);
+    padding-right: var(--space-fixed-md-4, 48px);
+    border-radius: var(--size-border-radius-xl, 16px);
+    width: 100%;
+  }
+
+  /* ── Header Wrapper ── */
+  .recco-header-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .recco-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    padding-top: var(--space-fixed-sm-5, 16px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .recco-heading {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--font-size-h4);
+    line-height: var(--font-line-height-h4);
+    letter-spacing: var(--font-letter-spacing-h4);
+    color: var(--colour-text-intense-neutral);
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  /* ── Content Wrapper ── */
+  .recco-content-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .recco-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    width: 100%;
+  }
+
+  /* ── Cards row ── */
+  .cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-fixed-sm-5);
+    align-items: stretch;
+    width: 100%;
+  }
+
+  /* ── CTA button (neutral outline — matches component-library Button variant="neutral") ── */
+  .cta-button {
+    display: flex;
+    gap: var(--fixed-100);
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    padding: var(--scale-150) var(--scale-400);
+    border: 1px solid var(--colour-text-intense-neutral);
+    border-radius: var(--size-border-radius-lg);
+    background: transparent;
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-button-1);
+    line-height: var(--font-line-height-button);
+    letter-spacing: var(--font-letter-spacing-button);
+    color: var(--colour-text-intense-neutral);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.75;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .recco-01 {
+      padding-left: var(--space-fixed-md-2, 32px);
+      padding-right: var(--space-fixed-md-2, 32px);
+    }
+
+    .cards-row {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recco-01 {
+      padding-left: var(--space-fixed-md-1, 24px);
+      padding-right: var(--space-fixed-md-1, 24px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .recco-01 {
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+
+    .recco-heading {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.48px;
+    }
+
+    .cards-row {
+      flex-direction: column;
+    }
+  }
+</style>

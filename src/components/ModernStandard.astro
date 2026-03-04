@@ -1,0 +1,282 @@
+---
+/**
+ * ModernStandard — "The Modern Standard Section"  
+ * Figma node: 21671:9830
+ *
+ * Features grid with 4 cards showing PG benefits
+ */
+
+import { Image } from 'astro:assets';
+
+type CardData = {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+  href: string;
+};
+
+const cards: CardData[] = [
+  {
+    id: "21671:9841",
+    image: "/images/modern-standard-1.png",
+    title: "Transparent core",
+    description: "No hidden fees. No brokerage. Just direct management.",
+    href: "https://www.motel6.com/",
+  },
+  {
+    id: "21671:9833",
+    image: "/images/modern-standard-2.png",
+    title: "Managed precision",
+    description: "Fully managed with weekly deep cleaning and preventive care.",
+    href: "https://booksundays.com/",
+  },
+  {
+    id: "21671:9837",
+    image: "/images/modern-standard-3.png",
+    title: "Design first",
+    description: "Minimal design with ergonomic, functional furniture for mental clarity.",
+    href: "https://booksundays.com/",
+  },
+  {
+    id: "21671:9849",
+    image: "/images/modern-standard-4.png",
+    title: "Urban access",
+    description: "Near major transit hubs, so you commute less and live more.",
+    href: "https://thepalettecollections.com/",
+  },
+];
+---
+
+<section class="modern-standard" data-node-id="21671:9830">
+  <!-- Header -->
+  <div class="modern-standard-header" data-node-id="21844:29061">
+    <div class="header-content">
+      <p class="main-heading" data-node-id="21844:29069">
+        The Modern Standard
+      </p>
+      <p class="subtitle" data-node-id="21844:29073">
+        Everything you expect, redefined with precision and care.
+      </p>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid-wrapper" data-node-id="21671:9832">
+    <div class="grid-content">
+      {cards.map((card) => (
+        <a 
+          class="card" 
+          href={card.href}
+          data-node-id={card.id}
+        >
+          <div class="card-image">
+            <div class="image-container">
+              <Image src={card.image} alt={card.title} width={400} height={282} loading="lazy" />
+            </div>
+          </div>
+          <div class="card-strings">
+            <div class="card-title-wrapper">
+              <p class="card-title">{card.title}</p>
+            </div>
+            <p class="card-description">{card.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .modern-standard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    overflow: clip;
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-top: var(--space-fixed-md-1, 24px);
+    padding-left: var(--space-fixed-md-4, 48px);
+    padding-right: var(--space-fixed-md-4, 48px);
+    border-radius: var(--size-border-radius-xl, 16px);
+    width: 100%;
+  }
+
+  /* ── Header ── */
+  .modern-standard-header {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    padding-top: var(--space-fixed-sm-5, 16px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .main-heading {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h4, 32px);
+    line-height: var(--font-line-height-h4, 40px);
+    letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    color: var(--colour-text-intense-neutral, #282828);
+    width: 100%;
+    margin: 0;
+    font-feature-settings: 'ss01', 'cv06', 'cv05', 'cv08', 'cv10';
+  }
+
+  .subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-subtitle-1, 16px);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    max-width: 1200px;
+    width: 100%;
+    margin: 0;
+    font-feature-settings: 'ss01', 'cv01', 'cv02', 'cv03', 'cv04', 'cv05', 'cv06', 'cv08';
+  }
+
+  /* ── Grid ── */
+  .grid-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .grid-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  /* ── Card ── */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: start;
+    flex: 1 0 0;
+    max-width: 400px;
+    min-width: 148px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ── Card Image ── */
+  .card-image {
+    height: 282px;
+    width: 100%;
+    border-radius: var(--size-border-radius-xl, 16px);
+    position: relative;
+  }
+
+  .image-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: var(--size-border-radius-xl, 16px);
+    pointer-events: none;
+  }
+
+  .image-container img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+
+  /* ── Card Text ── */
+  .card-strings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: start;
+    color: var(--colour-text-intense-neutral, #282828);
+    text-align: left;
+    width: 100%;
+  }
+
+  .card-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 24px;
+    width: 100%;
+  }
+
+  .card-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h6, 20px);
+    line-height: var(--font-line-height-h6, 26px);
+    letter-spacing: var(--font-letter-spacing-h6, -0.35px);
+    margin: 0;
+    font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04', 'cv05', 'cv06', 'cv08', 'cv10', 'ss01', 'ss03', 'cv09';
+  }
+
+  .card-description {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-subtitle-1, 16px);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    color: var(--colour-text-intense-neutral, #282828);
+    width: 100%;
+    margin: 0;
+    font-feature-settings: 'ss01', 'cv01', 'cv02', 'cv03', 'cv04', 'cv05', 'cv06', 'cv08';
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .modern-standard {
+      padding-left: var(--space-fixed-md-2, 32px);
+      padding-right: var(--space-fixed-md-2, 32px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modern-standard {
+      padding-left: var(--space-fixed-md-1, 24px);
+      padding-right: var(--space-fixed-md-1, 24px);
+    }
+
+    .card {
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .modern-standard {
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+
+    .main-heading {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.48px;
+    }
+  }
+</style>

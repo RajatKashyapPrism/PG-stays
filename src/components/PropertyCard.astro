@@ -1,0 +1,376 @@
+---
+/**
+ * PropertyCard — Reusable property card component with image carousel
+ * Supports up to 5 images with navigation buttons and indicators
+ */
+
+import { Image } from 'astro:assets';
+
+export interface Props {
+  id?: string;
+  images: string[];
+  gender: string;
+  genderType: "female" | "male";
+  name: string;
+  address: string;
+  price: string;
+  priority?: boolean;
+}
+
+const { id, images, gender, genderType, name, address, price, priority = false } = Astro.props;
+const displayImages = images.slice(0, 5); // Ensure max 5 images
+const imageLoading = priority ? 'eager' : 'lazy';
+---
+
+<div class="property-card" data-node-id={id}>
+  <!-- Image header with carousel -->
+  <div class="card-image-header">
+    <div class="card-image-track">
+      {displayImages.map((image) => (
+        <div class="card-image-slide">
+          <Image src={image} alt={name} class="card-image" width={328} height={218} loading={imageLoading} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Carousel indicators -->
+    <div class="carousel-indicators">
+      {displayImages.map((_, index) => (
+        <div class={`carousel-dot ${index === 0 ? 'active' : ''}`} data-slide={index}></div>
+      ))}
+    </div>
+
+    <!-- Navigation buttons -->
+    <button class="carousel-nav carousel-nav--prev" data-direction="prev" aria-label="Previous image">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="carousel-nav carousel-nav--next" data-direction="next" aria-label="Next image">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Gender badge -->
+    <div class={`gender-badge gender-badge--${genderType}`} data-node-id="badge">
+      {genderType === "female" ? (
+        <!-- Female icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="#282828" stroke-width="1.5" />
+          <path d="M12 12v8M9 17h6" stroke="#282828" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      ) : (
+        <!-- Male icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="10" cy="14" r="4" stroke="#282828" stroke-width="1.5" />
+          <path d="M14 10l4-4M14 6h4v4" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      )}
+      <span class="badge-label">{gender}</span>
+    </div>
+  </div>
+
+  <!-- Card body -->
+  <div class="card-body">
+    <div class="card-details">
+      <p class="card-name">{name}</p>
+      <p class="card-address">{address}</p>
+    </div>
+    <div class="card-pricing">
+      <span class="price-starting">Starting</span>
+      <span class="price-amount">{price}</span>
+      <span class="price-month">/month</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Carousel functionality with hover navigation and indicators
+  const initializeCarousel = () => {
+    const propertyCards = document.querySelectorAll('.property-card');
+    
+    propertyCards.forEach((card) => {
+      // Skip if already initialized
+      if ((card as HTMLElement).dataset.carouselInitialized) return;
+      (card as HTMLElement).dataset.carouselInitialized = 'true';
+      
+      const imageTrack = card.querySelector('.card-image-track') as HTMLElement;
+      const navButtons = card.querySelectorAll('.carousel-nav');
+      const indicators = card.querySelectorAll('.carousel-dot');
+      const slides = card.querySelectorAll('.card-image-slide');
+      let currentSlide = 0;
+      
+      if (slides.length <= 1) return; // Skip if only one image
+      
+      const updateCarousel = () => {
+        if (imageTrack) {
+          imageTrack.style.transform = `translateX(calc(-${currentSlide} * 100%))`;
+        }
+        indicators.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+      };
+      
+      // Navigation button clicks
+      navButtons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const direction = (btn as HTMLElement).dataset.direction;
+          if (direction === 'prev') {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+          } else {
+            currentSlide = (currentSlide + 1) % slides.length;
+          }
+          updateCarousel();
+        });
+      });
+      
+      // Click indicators to navigate
+      indicators.forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentSlide = index;
+          updateCarousel();
+        });
+      });
+    });
+  };
+  
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCarousel);
+  } else {
+    initializeCarousel();
+  }
+</script>
+
+<style>
+  /* ── Individual card ── */
+  .property-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    min-width: 296px;
+    overflow: clip;
+    border-radius: var(--size-border-radius-lg);
+    background: var(--colour-background-subtle-neutral-1);
+    box-shadow:
+      0px 0px 2px 0px rgba(0, 0, 0, 0.08),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.08),
+      0px 2px 6px 0px rgba(0, 0, 0, 0.02),
+      0px 2px 5px 0px rgba(0, 0, 0, 0.04),
+      0px 6px 5px 0px rgba(0, 0, 0, 0.01);
+  }
+
+  /* ── Card image ── */
+  .card-image-header {
+    aspect-ratio: 328 / 218;
+    width: 100%;
+    position: relative;
+    overflow: clip;
+  }
+
+  .card-image-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .card-image-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  /* ── Carousel indicators ── */
+  .carousel-indicators {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background: white;
+  }
+
+  /* ── Navigation buttons ── */
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--fixed-sm-3, 8px);
+    background: rgba(40, 40, 40, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    border-radius: var(--size-border-radius-pill, 128px);
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.2s ease;
+  }
+
+  .carousel-nav:hover {
+    background: rgba(40, 40, 40, 0.85);
+  }
+
+  .card-image-header:hover .carousel-nav {
+    opacity: 1;
+  }
+
+  .carousel-nav--prev {
+    left: 8px;
+  }
+
+  .carousel-nav--next {
+    right: 8px;
+  }
+
+  .carousel-nav svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* ── Gender badge ── */
+  .gender-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: var(--space-fixed-sm-2) var(--fixed-50);
+    border-radius: var(--size-border-radius-md);
+    background: white;
+    box-shadow:
+      0px 4px 5px 0px rgba(0, 0, 0, 0.06),
+      0px 1px 10px 0px rgba(0, 0, 0, 0.04),
+      0px 2px 4px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .badge-label {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-caption);
+    line-height: var(--font-line-height-caption);
+    letter-spacing: var(--font-letter-spacing-caption-regular);
+    color: var(--colour-text-intense-neutral);
+    white-space: nowrap;
+    padding: 0 var(--fixed-50);
+  }
+
+  /* ── Card body ── */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3);
+    padding: var(--space-fixed-sm-5);
+    width: 100%;
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-1);
+  }
+
+  .card-name {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-subtitle-1);
+    line-height: var(--font-line-height-subtitle-1);
+    letter-spacing: var(--font-letter-spacing-subtitle-2-regular);
+    color: var(--colour-text-intense-neutral);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+
+  .card-address {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-caption);
+    line-height: var(--font-line-height-caption);
+    letter-spacing: var(--font-letter-spacing-caption-regular);
+    color: var(--colour-text-moderate-neutral);
+    margin: 0;
+  }
+
+  /* ── Pricing ── */
+  .card-pricing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-fixed-sm-2);
+  }
+
+  .price-starting {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-subtitle-2);
+    line-height: var(--font-line-height-subtitle-2);
+    color: var(--colour-text-moderate-neutral);
+  }
+
+  .price-amount {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading);
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: -0.35px;
+    color: var(--colour-text-intense-neutral);
+  }
+
+  .price-month {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-subtitle-2);
+    line-height: var(--font-line-height-subtitle-2);
+    color: var(--colour-text-intense-neutral);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .property-card {
+      min-width: calc(50% - var(--space-fixed-sm-5) / 2);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .property-card {
+      min-width: unset;
+      width: 100%;
+    }
+  }
+</style>
