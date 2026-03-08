@@ -7,7 +7,6 @@
 import { Image } from 'astro:assets';
 
 export interface Props {
-  id?: string;
   images: string[];
   gender: string;
   genderType: "female" | "male";
@@ -17,12 +16,12 @@ export interface Props {
   priority?: boolean;
 }
 
-const { id, images, gender, genderType, name, address, price, priority = false } = Astro.props;
+const { images, gender, genderType, name, address, price, priority = false } = Astro.props;
 const displayImages = images.slice(0, 5); // Ensure max 5 images
 const imageLoading = priority ? 'eager' : 'lazy';
 ---
 
-<div class="property-card" data-node-id={id}>
+<div class="property-card">
   <!-- Image header with carousel -->
   <div class="card-image-header">
     <div class="card-image-track">
@@ -53,7 +52,7 @@ const imageLoading = priority ? 'eager' : 'lazy';
     </button>
 
     <!-- Gender badge -->
-    <div class={`gender-badge gender-badge--${genderType}`} data-node-id="badge">
+    <div class={`gender-badge gender-badge--${genderType}`}>
       {genderType === "female" ? (
         <!-- Female icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -5,20 +5,20 @@ import LibraryButton from './LibraryButton';
 import { Image } from 'astro:assets';
 ---
 
-<header class="hero" data-node-id="21671:9815">
+<header class="hero">
   <div class="hero-wrapper">
-    <section class="hero-content" data-node-id="21671:9819">
-    <div class="titles" data-node-id="21671:11696">
-      <p class="main-title" data-node-id="21671:11697">
+    <section class="hero-content">
+    <div class="titles">
+      <p class="main-title">
         Premium PG Living.<br />
         Zero Hassle.
       </p>
-      <p class="subtitle" data-node-id="21671:11698">
+      <p class="subtitle">
         Well-designed co-living spaces for professionals. A premium experience focused on comfort, convenience, and value.
       </p>
     </div>
 
-    <div class="contact-form" data-node-id="21671:14112">
+    <div class="contact-form">
       <LibraryTextField client:load label="Full name" />
       <LibraryTextField client:load label="City" />
       <LibraryPhoneField client:load label="Mobile number" placeholder="Mobile number" />
@@ -35,10 +35,10 @@ import { Image } from 'astro:assets';
   </section>
 
   <div class="hero-image-wrapper">
-    <div class="hero-image" data-node-id="21671:9818">
+    <div class="hero-image">
       <Image
-        src="http://localhost:3845/assets/e77a3a6b6df5fe225b6584faf93f5682a5d90112.png" 
-        alt="sunday proptech" 
+        src="/images/property-1.png"
+        alt="PG Stay"
         class="image"
         width={600}
         height={600}
@@ -116,7 +116,7 @@ import { Image } from 'astro:assets';
   }
 
   .subtitle {
-    font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;

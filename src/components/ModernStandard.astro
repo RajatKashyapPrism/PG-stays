@@ -1,75 +1,54 @@
 ---
-/**
- * ModernStandard — "The Modern Standard Section"  
- * Figma node: 21671:9830
- *
- * Features grid with 4 cards showing PG benefits
- */
-
 import { Image } from 'astro:assets';
 
 type CardData = {
-  id: string;
   image: string;
   title: string;
   description: string;
-  href: string;
 };
 
 const cards: CardData[] = [
   {
-    id: "21671:9841",
     image: "/images/modern-standard-1.png",
     title: "Transparent core",
     description: "No hidden fees. No brokerage. Just direct management.",
-    href: "https://www.motel6.com/",
   },
   {
-    id: "21671:9833",
     image: "/images/modern-standard-2.png",
     title: "Managed precision",
     description: "Fully managed with weekly deep cleaning and preventive care.",
-    href: "https://booksundays.com/",
   },
   {
-    id: "21671:9837",
     image: "/images/modern-standard-3.png",
     title: "Design first",
     description: "Minimal design with ergonomic, functional furniture for mental clarity.",
-    href: "https://booksundays.com/",
   },
   {
-    id: "21671:9849",
     image: "/images/modern-standard-4.png",
     title: "Urban access",
     description: "Near major transit hubs, so you commute less and live more.",
-    href: "https://thepalettecollections.com/",
   },
 ];
 ---
 
-<section class="modern-standard" data-node-id="21671:9830">
+<section class="modern-standard">
   <!-- Header -->
-  <div class="modern-standard-header" data-node-id="21844:29061">
+  <div class="modern-standard-header">
     <div class="header-content">
-      <p class="main-heading" data-node-id="21844:29069">
+      <p class="main-heading">
         The Modern Standard
       </p>
-      <p class="subtitle" data-node-id="21844:29073">
+      <p class="subtitle">
         Everything you expect, redefined with precision and care.
       </p>
     </div>
   </div>
 
   <!-- Grid -->
-  <div class="grid-wrapper" data-node-id="21671:9832">
+  <div class="grid-wrapper">
     <div class="grid-content">
       {cards.map((card) => (
-        <a 
-          class="card" 
-          href={card.href}
-          data-node-id={card.id}
-        >
+        <div class="card">
           <div class="card-image">
             <div class="image-container">
               <Image src={card.image} alt={card.title} width={400} height={282} loading="lazy" />
@@ -81,7 +60,7 @@ const cards: CardData[] = [
             </div>
             <p class="card-description">{card.description}</p>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   </div>
@@ -160,7 +139,6 @@ const cards: CardData[] = [
     align-items: start;
     justify-content: center;
     width: 100%;
-    cursor: pointer;
   }
 
   /* ── Card ── */
@@ -172,13 +150,6 @@ const cards: CardData[] = [
     flex: 1 0 0;
     max-width: 400px;
     min-width: 148px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
   }
 
   /* ── Card Image ── */

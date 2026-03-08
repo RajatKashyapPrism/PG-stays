@@ -1,14 +1,8 @@
 ---
-/**
- * recco-01 — "Top Performing Assets Section"
- * Figma node: 21671:9868
- */
-
 import PropertyCard from './PropertyCard.astro';
 import LibraryButton from './LibraryButton';
 
 type CardData = {
-  id: string;
   images: string[];
   gender: string;
   genderType: "female" | "male";
@@ -19,7 +13,6 @@ type CardData = {
 
 const cards: CardData[] = [
   {
-    id: "21790:106228",
     images: [
       "/images/property-1.png",
       "/images/property-common.png",
@@ -34,7 +27,6 @@ const cards: CardData[] = [
     price: "₹5,500",
   },
   {
-    id: "21790:106593",
     images: [
       "/images/property-2.png",
       "/images/property-common.png",
@@ -49,7 +41,6 @@ const cards: CardData[] = [
     price: "₹7,500",
   },
   {
-    id: "21790:106771",
     images: [
       "/images/property-3.png",
       "/images/property-common.png",
@@ -66,22 +57,21 @@ const cards: CardData[] = [
 ];
 ---
 
-<section class="recco-01" data-node-id="21671:9868">
+<section class="recco-01">
   <!-- Header -->
-  <div class="recco-header-wrapper" data-node-id="21844:29245">
+  <div class="recco-header-wrapper">
     <div class="recco-header">
       <p class="recco-heading">Premium PG's in Bangalore</p>
     </div>
   </div>
 
   <!-- Content -->
-  <div class="recco-content-wrapper" data-node-id="21844:27535">
+  <div class="recco-content-wrapper">
     <div class="recco-content">
       <!-- Cards row -->
-      <div class="cards-row" data-node-id="21671:9875">
+      <div class="cards-row">
       {cards.map((card, index) => (
         <PropertyCard
-          id={card.id}
           images={card.images}
           gender={card.gender}
           genderType={card.genderType}
