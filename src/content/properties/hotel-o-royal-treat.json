@@ -1,0 +1,15 @@
+{
+  "name": "Hotel O Royal Treat",
+  "address": "Kammasandra Village Road",
+  "gender": "Boys only",
+  "genderType": "male",
+  "price": "₹9,500",
+  "images": [
+    "/images/property-3.png",
+    "/images/property-common.png",
+    "/images/property-common.png",
+    "/images/property-common.png",
+    "/images/property-common.png"
+  ],
+  "order": 3
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Super Collection O Electronic City",
+  "address": "Kammasandra Village Road",
+  "gender": "Girls only",
+  "genderType": "female",
+  "price": "₹5,500",
+  "images": [
+    "/images/property-1.png",
+    "/images/property-common.png",
+    "/images/property-common.png",
+    "/images/property-common.png",
+    "/images/property-common.png"
+  ],
+  "order": 1
+}

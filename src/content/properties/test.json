@@ -1,0 +1,14 @@
+{
+  "name": "Test",
+  "address": "Test address",
+  "gender": "Girls only",
+  "genderType": "male",
+  "price": "$50",
+  "images": [
+    "https://images.oyoroomscdn.com/uploads/hotel_image/56056/medium/xtaevdqugekt.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/56056/medium/ufpibmailxjh.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/56056/medium/yycioyoyvbcb.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/300753/medium/ghhjpkwvshtp.jpg"
+  ],
+  "order": 1
+}

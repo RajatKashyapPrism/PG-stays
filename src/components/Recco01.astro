@@ -1,60 +1,13 @@
 ---
 import PropertyCard from './PropertyCard.astro';
 import LibraryButton from './LibraryButton';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-type CardData = {
-  images: string[];
-  gender: string;
-  genderType: "female" | "male";
-  name: string;
-  address: string;
-  price: string;
-};
-
-const cards: CardData[] = [
-  {
-    images: [
-      "/images/property-1.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-    ].slice(0, 5),
-    gender: "Girls only",
-    genderType: "female",
-    name: "Super Collection O Electronic City",
-    address: "Kammasandra Village Road",
-    price: "₹5,500",
-  },
-  {
-    images: [
-      "/images/property-2.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-    ].slice(0, 5),
-    gender: "Boys only",
-    genderType: "male",
-    name: "Sarjapur Road Formerly Hotel Ace",
-    address: "Varthur Hobli, Bangalore",
-    price: "₹7,500",
-  },
-  {
-    images: [
-      "/images/property-3.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-      "/images/property-common.png",
-    ].slice(0, 5),
-    gender: "Boys only",
-    genderType: "male",
-    name: "Hotel O Royal Treat",
-    address: "Kammasandra Village Road",
-    price: "₹9,500",
-  },
-];
+const reader = createReader(process.cwd(), keystaticConfig);
+const allProperties = await reader.collections.properties.all();
+const cards = allProperties
+  .sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));
 ---
 
 <section class="recco-01">
@@ -72,12 +25,12 @@ const cards: CardData[] = [
       <div class="cards-row">
       {cards.map((card, index) => (
         <PropertyCard
-          images={card.images}
-          gender={card.gender}
-          genderType={card.genderType}
-          name={card.name}
-          address={card.address}
-          price={card.price}
+          images={card.entry.images.slice(0, 5)}
+          gender={card.entry.gender}
+          genderType={card.entry.genderType as "female" | "male"}
+          name={card.entry.name}
+          address={card.entry.address}
+          price={card.entry.price}
           priority={index === 0}
         />
       ))}
