@@ -9,7 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@prism-design-global/component-library": "^0.2.0",
-    "astro": "^5.17.1"
+    "@astrojs/react": "^4.4.2",
+    "@prism-design-global/components": "^0.3.0",
+    "astro": "^5.17.1",
+    "react": "^19.2.4",
+    "react-aria-components": "^1.16.0",
+    "react-dom": "^19.2.4"
   }
 }

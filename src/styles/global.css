@@ -1,75 +1,48 @@
+@import '@prism-design-global/components/styles.css';
+@import '@prism-design-global/components/tokens.css';
+
+/* Raw base dimension tokens — required by tokens.css and style.css */
 :root {
-  /* Colors */
-  --colour-background-intense-brand-invert-primary: white;
-  --colour-background-subtle-neutral-1: white;
-  --colour-background-intense-brand-primary: #c93232;
-  --colour-text-intense-neutral: #282828;
-  --colour-text-moderate-neutral: #6c6c6c;
-  --colour-text-intense-on-intense-brand-primary: white;
-  --colour-border-subtle-neutral: #ddd;
-  --hyperlink-colour-active: #006ad4;
-
-  /* Typography - Font Families */
-  --font-family-heading: 'Optima nova LT Pro', 'Optima', serif;
-  --font-family-body: 'Inter', sans-serif;
-
-  /* Typography - Font Sizes */
-  --font-size-h4: 32px;
-  --font-size-h6: 20px;
-  --font-size-subtitle-1: 16px;
-  --font-size-subtitle-2: 14px;
-  --font-size-button-1: 16px;
-  --font-size-caption: 12px;
-
-  /* Typography - Font Weights */
-  --font-weight-heading: 700;
-  --font-weight-medium: 600;
-  --font-weight-regular: 400;
-
-  /* Typography - Line Heights */
-  --font-line-height-h4: 40px;
-  --font-line-height-h6: 26px;
-  --font-line-height-subtitle-1: 24px;
-  --font-line-height-subtitle-2: 22px;
-  --font-line-height-button: 24px;
-  --font-line-height-caption: 16px;
-
-  /* Typography - Letter Spacing */
-  --font-letter-spacing-h4: -0.5px;
-  --font-letter-spacing-h6: -0.35px;
-  --font-letter-spacing-subtitle-1-regular: 0.3px;
-  --font-letter-spacing-subtitle-2-regular: 0px;
-  --font-letter-spacing-button: 0px;
-  --font-letter-spacing-caption-regular: 0px;
-
-  /* Spacing */
-  --space-fixed-sm-1: 2px;
-  --space-fixed-sm-2: 4px;
-  --space-fixed-sm-3: 8px;
-  --space-fixed-sm-4: 12px;
-  --space-fixed-sm-5: 16px;
-  --space-fixed-md-1: 24px;
-  --space-fixed-md-2: 32px;
-  --space-fixed-md-3: 40px;
-  --space-fixed-md-4: 48px;
-  --space-scale-md-1: 24px;
-  --space-scale-md-2: 32px;
-  --space-scale-md-3: 40px;
-  --space-scale-md-5: 56px;
-  --scale-150: 12px;
-  --scale-400: 32px;
+  /* Fixed (viewport-independent) */
   --fixed-25: 2px;
   --fixed-50: 4px;
   --fixed-100: 8px;
   --fixed-150: 12px;
   --fixed-200: 16px;
+  --fixed-300: 24px;
+  --fixed-400: 32px;
+  --fixed-500: 40px;
+  --fixed-600: 48px;
 
-  /* Border Radius */
-  --size-border-radius-md: 12px;
-  --size-border-radius-lg: 12px;
-  --size-border-radius-xl: 16px;
-  --size-border-radius-xxl: 32px;
-  --button-size-border-radius-lg: 16px;
+  /* Scale (responsive — desktop values) */
+  --scale-25: 4px;
+  --scale-50: 8px;
+  --scale-100: 12px;
+  --scale-150: 16px;
+  --scale-200: 24px;
+  --scale-300: 32px;
+  --scale-400: 40px;
+  --scale-500: 48px;
+  --scale-600: 56px;
+  --scale-700: 64px;
+  --scale-800: 72px;
+  --scale-900: 80px;
+  --scale-1000: 88px;
+  --scale-1100: 96px;
+  --scale-1200: 112px;
+  --scale-1400: 128px;
+  --scale-1600: 144px;
+}
+
+/* Mobile scale overrides */
+@media (max-width: 768px) {
+  :root {
+    --scale-25: 2px;
+    --scale-50: 4px;
+    --scale-100: 8px;
+    --scale-150: 12px;
+    --scale-200: 16px;
+  }
 }
 
 * {
@@ -95,4 +68,9 @@ button {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* PhoneField doesn't accept a style/className prop — force full width via wrapper */
+.phone-field-full-width > * {
+  width: 100%;
 }

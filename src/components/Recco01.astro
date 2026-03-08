@@ -2,12 +2,10 @@
 /**
  * recco-01 — "Top Performing Assets Section"
  * Figma node: 21671:9868
- *
- * CTA button styled to match @prism-design-global/component-library
- * Button variant="neutral" size="md" (outline, dark border, no fill)
  */
 
 import PropertyCard from './PropertyCard.astro';
+import LibraryButton from './LibraryButton';
 
 type CardData = {
   id: string;
@@ -95,13 +93,13 @@ const cards: CardData[] = [
       ))}
       </div>
 
-      <!--
-        CTA button — matches @prism-design-global/component-library
-        Button variant="neutral" size="md"
-      -->
-      <a href="https://contact.oyoassets.com/" class="cta-button" data-node-id="21844:27518">
-        Book a Free Visit
-      </a>
+      <LibraryButton
+        client:load
+        label="Book a Free Visit"
+        href="https://contact.oyoassets.com/"
+        variant="tertiary"
+        size="md"
+      />
     </div>
   </div>
 </section>
@@ -174,33 +172,6 @@ const cards: CardData[] = [
     gap: var(--space-fixed-sm-5);
     align-items: stretch;
     width: 100%;
-  }
-
-  /* ── CTA button (neutral outline — matches component-library Button variant="neutral") ── */
-  .cta-button {
-    display: flex;
-    gap: var(--fixed-100);
-    align-items: center;
-    justify-content: center;
-    min-width: 72px;
-    padding: var(--scale-150) var(--scale-400);
-    border: 1px solid var(--colour-text-intense-neutral);
-    border-radius: var(--size-border-radius-lg);
-    background: transparent;
-    font-family: var(--font-family-body);
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-button-1);
-    line-height: var(--font-line-height-button);
-    letter-spacing: var(--font-letter-spacing-button);
-    color: var(--colour-text-intense-neutral);
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-
-  .cta-button:hover {
-    opacity: 0.75;
   }
 
   /* ── Responsive ── */
