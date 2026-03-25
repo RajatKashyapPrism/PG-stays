@@ -20,8 +20,8 @@ import { Image } from 'astro:assets';
 
     <form class="contact-form" action="https://contact.oyoassets.com/" method="get">
       <input type="hidden" name="source" value="hero" />
-      <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired />
-      <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired />
+      <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired errorMessage="Enter your name" />
+      <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired errorMessage="Enter your preferred city" />
       <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
       <LibraryButton
         client:load

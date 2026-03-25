@@ -1,4 +1,5 @@
-import { TextField } from '@prism-design-global/components';
+import { useRef, useState } from 'react';
+import { PhoneField } from '@prism-design-global/components';
 
 interface Props {
   label?: string;
@@ -10,38 +11,76 @@ interface Props {
   isReadOnly?: boolean;
   isInvalid?: boolean;
   name?: string;
-  autoComplete?: string;
 }
 
 export default function LibraryPhoneField({
   label = 'Mobile number',
   placeholder,
   description,
-  errorMessage,
+  errorMessage = 'Please enter a mobile number.',
   isDisabled,
   isRequired,
   isReadOnly,
-  isInvalid,
+  isInvalid: isInvalidProp,
   name,
-  autoComplete,
 }: Props) {
+  const hiddenRef = useRef<HTMLInputElement>(null);
+  const [showError, setShowError] = useState(false);
+
+  const isInvalid = isInvalidProp || showError;
+
   return (
-    <div className="phone-field-full-width" style={{ width: '100%' }}>
-      <TextField
+    <>
+    <style>{`
+      .phone-field-wrapper > * {
+        width: 100%;
+      }
+      .phone-field-invalid label {
+        color: var(--colour-text-intense-negative);
+      }
+    `}</style>
+    <div
+      className={`phone-field-wrapper${isInvalid ? ' phone-field-invalid' : ''}`}
+      style={{ width: '100%', position: 'relative' }}
+      onInput={(e) => {
+        const v = (e.target as HTMLInputElement).value ?? '';
+        if (hiddenRef.current) hiddenRef.current.value = v;
+        if (v.trim() !== '') setShowError(false);
+      }}
+    >
+      <PhoneField
         label={label}
         placeholder={placeholder}
         description={description}
-        errorMessage={errorMessage}
+        errorMessage={isInvalid ? errorMessage : undefined}
         isDisabled={isDisabled}
         isRequired={isRequired}
         isReadOnly={isReadOnly}
         isInvalid={isInvalid}
-        name={name}
-        autoComplete={autoComplete ?? 'tel'}
-        type="tel"
-        inputMode="tel"
-        style={{ width: '100%' }}
       />
+      {name && (
+        <input
+          ref={hiddenRef}
+          name={name}
+          required={isRequired}
+          tabIndex={-1}
+          aria-hidden="true"
+          onInvalid={(e) => {
+            e.preventDefault(); // suppress browser native tooltip
+            setShowError(true);
+          }}
+          style={{
+            position: 'absolute',
+            opacity: 0,
+            pointerEvents: 'none',
+            width: '1px',
+            height: '1px',
+            top: 0,
+            left: 0,
+          }}
+        />
+      )}
     </div>
+    </>
   );
 }
