@@ -1,0 +1,243 @@
+---
+const cities = [
+  {
+    title: 'Bengaluru',
+    image: 'https://www.figma.com/api/mcp/asset/ae97fe79-b1b6-4e9c-a3d7-e3a3a4dffcf5',
+    imageClass: 'city-tile__image--bengaluru',
+  },
+  {
+    title: 'Hyderabad',
+    image: 'https://www.figma.com/api/mcp/asset/6c20832e-d03c-452b-9b37-ef39e3c5614d',
+    imageClass: 'city-tile__image--hyderabad',
+  },
+  {
+    title: 'Gurgaon',
+    image: 'https://www.figma.com/api/mcp/asset/8bd64ee0-1c69-4e59-9bf9-9264199d2f30',
+    imageClass: 'city-tile__image--gurgaon',
+  },
+  {
+    title: 'Pune',
+    image: 'https://www.figma.com/api/mcp/asset/3881062f-4473-440c-9a7b-d3786c76b0f2',
+    imageClass: 'city-tile__image--pune',
+  },
+  {
+    title: 'Mumbai',
+    image: 'https://www.figma.com/api/mcp/asset/f6211dbe-31e4-4c0a-8591-8cc4d40402a1',
+    imageClass: 'city-tile__image--mumbai',
+  },
+  {
+    title: 'Noida',
+    image: 'https://www.figma.com/api/mcp/asset/7f3917eb-9bd2-40be-af3b-9a17f95a2721',
+    imageClass: 'city-tile__image--noida',
+  },
+];
+---
+
+<section class="top-cities">
+  <div class="top-cities__header-wrap">
+    <div class="top-cities__header">
+      <h2 class="top-cities__title">Available in Top Cities</h2>
+      <p class="top-cities__subtitle">Find us in the heart of India's biggest hubs.</p>
+    </div>
+  </div>
+
+  <div class="top-cities__grid-wrap">
+    <div class="top-cities__grid">
+      {cities.map((city) => (
+        <article class="city-tile" aria-label={city.title}>
+          <div class="city-tile__media">
+            <img class={`city-tile__image ${city.imageClass}`} src={city.image} alt={city.title} loading="lazy" />
+          </div>
+          <div class="city-tile__overlay">
+            <h3 class="city-tile__title">{city.title}</h3>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .top-cities {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: clip;
+    background: var(--colour-background-subtle-neutral-1, #ffffff);
+    border-radius: 24px;
+    padding-top: var(--space-scale-md-1, 24px);
+    padding-right: var(--space-fixed-md-2, 32px);
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-left: var(--space-fixed-md-2, 32px);
+  }
+
+  .top-cities__header-wrap,
+  .top-cities__grid-wrap {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .top-cities__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-fixed-sm-3, 8px);
+    width: 100%;
+    padding-top: var(--space-fixed-sm-5, 16px);
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    text-align: center;
+  }
+
+  .top-cities__title {
+    width: 100%;
+    margin: 0;
+    color: var(--colour-text-intense-neutral, #282828);
+    font-family: var(--font-family-heading, var(--font-family-body));
+    font-size: var(--font-size-h4, 32px);
+    font-weight: var(--font-weight-heading, 700);
+    line-height: var(--font-line-height-h4, 40px);
+    letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    font-feature-settings: 'ss01' 1, 'cv06' 1, 'cv05' 1, 'cv08' 1, 'cv10' 1;
+  }
+
+  .top-cities__subtitle {
+    width: 100%;
+    margin: 0;
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-subtitle-1, 16px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    font-feature-settings: 'ss01' 1, 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1;
+  }
+
+  .top-cities__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-fixed-md-1, 24px);
+    width: 100%;
+  }
+
+  .city-tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    overflow: clip;
+    border-radius: var(--size-border-radius-md, 8px);
+    background: #d9d9d9;
+  }
+
+  .city-tile__media {
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+    border-radius: var(--size-border-radius-md, 8px);
+  }
+
+  .city-tile__image {
+    position: absolute;
+    display: block;
+    max-width: none;
+  }
+
+  .city-tile__image--bengaluru {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .city-tile__image--hyderabad {
+    top: -7.45%;
+    left: -65.57%;
+    width: 191.03%;
+    height: 107.45%;
+  }
+
+  .city-tile__image--gurgaon {
+    top: -0.14%;
+    left: -55.23%;
+    width: 191.36%;
+    height: 127.59%;
+  }
+
+  .city-tile__image--pune {
+    top: -37.53%;
+    left: -65.38%;
+    width: 239.25%;
+    height: 159.52%;
+  }
+
+  .city-tile__image--mumbai {
+    top: -33.94%;
+    left: -78.42%;
+    width: 215.72%;
+    height: 143.89%;
+  }
+
+  .city-tile__image--noida {
+    top: -12.57%;
+    left: -56.45%;
+    width: 170.04%;
+    height: 112.63%;
+  }
+
+  .city-tile__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-fixed-sm-5, 16px);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.72) 100%);
+  }
+
+  .city-tile__title {
+    width: 100%;
+    margin: 0;
+    color: var(--colour-agnostic-white, #ffffff);
+    font-family: var(--font-family-heading, var(--font-family-body));
+    font-size: var(--font-size-h6, 20px);
+    font-weight: var(--font-weight-heading, 700);
+    line-height: var(--font-line-height-h6, 26px);
+    letter-spacing: var(--font-letter-spacing-h6, -0.35px);
+    font-feature-settings: 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1, 'cv10' 1, 'ss01' 1, 'ss03' 1, 'cv09' 1;
+  }
+
+  @media (max-width: 640px) {
+    .top-cities {
+      gap: var(--space-fixed-sm-3, 8px);
+      border-radius: var(--size-border-radius-xl, 16px);
+      padding-top: var(--space-fixed-sm-3, 8px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+      padding-bottom: var(--space-fixed-md-1, 24px);
+      padding-left: var(--space-fixed-sm-5, 16px);
+    }
+
+    .top-cities__header {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .top-cities__title {
+      font-size: var(--font-size-h5, 25px);
+      line-height: var(--font-line-height-h5, 30px);
+      letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+    }
+
+    .top-cities__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-fixed-sm-5, 16px);
+    }
+
+    .city-tile__title {
+      font-size: var(--font-size-subtitle-1, 16px);
+      line-height: var(--font-line-height-subtitle-1, 24px);
+      letter-spacing: var(--font-letter-spacing-subtitle-1-high, -0.3px);
+    }
+  }
+</style>
