@@ -371,16 +371,10 @@ const imageLoading = priority ? 'eager' : 'lazy';
   }
 
   /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .property-card {
-      min-width: calc(50% - var(--space-fixed-sm-5) / 2);
-    }
-  }
-
   @media (max-width: 640px) {
-    .property-card {
-      min-width: unset;
-      width: 100%;
+    .carousel-nav,
+    .carousel-indicators {
+      display: none;
     }
   }
 </style>

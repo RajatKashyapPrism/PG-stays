@@ -15,35 +15,53 @@ const cards = allProperties
   <div class="recco-header-wrapper">
     <div class="recco-header">
       <p class="recco-heading">Premium PG's in Gurugram</p>
+      <!-- Carousel nav (desktop only) -->
+      <div class="carousel-nav">
+        <button class="nav-btn nav-btn--prev" aria-label="Scroll left">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="nav-btn nav-btn--next" aria-label="Scroll right">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Content -->
-  <div class="recco-content-wrapper">
-    <div class="recco-content">
-      <!-- Cards row -->
-      <div class="cards-row">
-      {cards.map((card, index) => (
-        <PropertyCard
-          images={card.entry.images.slice(0, 5)}
-          gender={card.entry.gender}
-          genderType={card.entry.genderType as "female" | "male"}
-          name={card.entry.name}
-          address={card.entry.address}
-          price={card.entry.price}
-          priority={index === 0}
-        />
-      ))}
+  <div class="recco-scroll-zone">
+    <div class="recco-content-wrapper">
+      <div class="recco-content">
+        <!-- Cards row -->
+        <div class="cards-row">
+        {cards.map((card, index) => (
+          <PropertyCard
+            images={card.entry.images.slice(0, 5)}
+            gender={card.entry.gender}
+            genderType={card.entry.genderType as "female" | "male"}
+            name={card.entry.name}
+            address={card.entry.address}
+            price={card.entry.price}
+            priority={index === 0}
+          />
+        ))}
+        </div>
       </div>
-
-      <LibraryButton
-        client:load
-        label="Book a Free Visit"
-        href="https://contact.oyoassets.com/"
-        variant="tertiary"
-        size="md"
-      />
     </div>
+  </div>
+
+  <!-- Button (outside scroll area) -->
+  <div class="recco-button-wrapper">
+    <LibraryButton
+      client:load
+      label="Book a free visit"
+      href="https://contact.oyoassets.com/"
+      variant="tertiary"
+      size="md"
+    />
   </div>
 </section>
 
@@ -66,55 +84,120 @@ const cards = allProperties
   .recco-header-wrapper {
     max-width: 1200px;
     width: 100%;
-    position: relative;
   }
 
   .recco-header {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-fixed-sm-3, 8px);
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding-bottom: var(--space-fixed-sm-3, 8px);
     padding-top: var(--space-fixed-sm-5, 16px);
-    text-align: center;
     width: 100%;
+    gap: var(--space-fixed-sm-5, 16px);
   }
 
   .recco-heading {
-    font-family: var(--font-family-body);
-    font-weight: var(--font-weight-heading);
-    font-size: var(--font-size-h4);
-    line-height: var(--font-line-height-h4);
-    letter-spacing: var(--font-letter-spacing-h4);
-    color: var(--colour-text-intense-neutral);
-    text-align: center;
-    width: 100%;
+    font-family: var(--font-family-heading, var(--font-family-body));
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h4, 32px);
+    line-height: var(--font-line-height-h4, 40px);
+    letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    color: var(--colour-text-intense-neutral, #282828);
     margin: 0;
+    flex: 1;
   }
 
-  /* ── Content Wrapper ── */
-  .recco-content-wrapper {
+  /* ── Carousel Nav Buttons ── */
+  .carousel-nav {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-fixed-sm-5, 16px);
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--size-border-radius-pill, 128px);
+    border: 1px solid var(--colour-border-subtle-neutral, #ddd);
+    background: var(--colour-background-subtle-neutral-1, #fff);
+    color: var(--colour-text-intense-neutral, #282828);
+    cursor: pointer;
+    padding: var(--space-fixed-sm-3, 8px);
+    transition: opacity 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+  }
+
+  .nav-btn:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  }
+
+  .nav-btn--hidden {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* ── Scroll Zone (outer, non-scrolling) ── */
+  .recco-scroll-zone {
     max-width: 1200px;
     width: 100%;
     position: relative;
   }
 
+  /* ── Content Wrapper (scrollable) ── */
+  .recco-content-wrapper {
+    width: calc(100% + 24px);
+    overflow-x: auto;
+    overflow-y: clip;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+    margin: -12px;
+  }
+
+  .recco-content-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
   .recco-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-fixed-md-1, 24px);
-    align-items: center;
     width: 100%;
+  }
+
+  /* ── Button Wrapper ── */
+  .recco-button-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   /* ── Cards row ── */
   .cards-row {
     display: flex;
     flex-direction: row;
-    gap: var(--space-fixed-sm-5);
+    gap: var(--space-fixed-sm-5, 16px);
     align-items: stretch;
     width: 100%;
+  }
+
+  /* ── Desktop: exactly 4 cards visible, rest overflow into scroll ── */
+  @media (min-width: 1025px) {
+    .cards-row > :global(*) {
+      flex: 0 0 calc(25% - var(--space-fixed-sm-5, 16px) * 3 / 4);
+      min-width: 0;
+    }
+  }
+
+  /* ── Hide carousel nav on mobile (touch swipe used instead) ── */
+  @media (max-width: 640px) {
+    .carousel-nav {
+      display: none;
+    }
   }
 
   /* ── Responsive ── */
@@ -138,6 +221,12 @@ const cards = allProperties
 
   @media (max-width: 640px) {
     .recco-02 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .recco-header-wrapper,
+    .recco-button-wrapper {
       padding-left: var(--space-fixed-sm-5, 16px);
       padding-right: var(--space-fixed-sm-5, 16px);
     }
@@ -148,8 +237,67 @@ const cards = allProperties
       letter-spacing: -0.48px;
     }
 
+    .recco-scroll-zone {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      margin-top: -12px;
+      margin-bottom: -12px;
+    }
+
+    .recco-content {
+      align-items: flex-start;
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+
     .cards-row {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      width: max-content;
+    }
+
+    .cards-row > :global(*) {
+      width: 296px;
+      min-width: 296px;
+      flex-shrink: 0;
     }
   }
 </style>
+
+<script>
+  function initCarousel() {
+    const sections = document.querySelectorAll<HTMLElement>('.recco-02');
+    sections.forEach((section) => {
+      const scrollEl = section.querySelector<HTMLElement>('.recco-content-wrapper');
+      const prevBtn = section.querySelector<HTMLButtonElement>('.nav-btn--prev');
+      const nextBtn = section.querySelector<HTMLButtonElement>('.nav-btn--next');
+      if (!scrollEl || !prevBtn || !nextBtn) return;
+
+      const SCROLL_AMOUNT = 320;
+
+      function updateButtons() {
+        const atStart = scrollEl!.scrollLeft <= 4;
+        const atEnd = scrollEl!.scrollLeft >= scrollEl!.scrollWidth - scrollEl!.clientWidth - 4;
+        const hasOverflow = scrollEl!.scrollWidth > scrollEl!.clientWidth + 8;
+
+        prevBtn!.classList.toggle('nav-btn--hidden', atStart || !hasOverflow);
+        nextBtn!.classList.toggle('nav-btn--hidden', atEnd || !hasOverflow);
+      }
+
+      prevBtn.addEventListener('click', () => {
+        scrollEl!.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        scrollEl!.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
+      });
+
+      scrollEl.addEventListener('scroll', updateButtons, { passive: true });
+      window.addEventListener('resize', updateButtons, { passive: true });
+
+      updateButtons();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initCarousel);
+</script>

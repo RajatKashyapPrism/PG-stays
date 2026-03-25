@@ -1,0 +1,93 @@
+---
+---
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <!-- Logo -->
+    <a href="/" class="navbar-logo" aria-label="Home">
+      <img src="/images/oyo-life-logo.png" alt="OYO Life" width="48" height="48" />
+    </a>
+
+    <!-- Nav links -->
+    <div class="navbar-menu">
+      <a href="#amenities" class="navbar-link" id="nav-amenities">Amenities</a>
+      <a href="#faq" class="navbar-link" id="nav-faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('nav-amenities')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('amenities')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('nav-faq')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--colour-border-subtle-neutral, #e8e8e8);
+    display: flex;
+    justify-content: center;
+    padding: var(--space-fixed-sm-3, 8px) var(--space-fixed-sm-5, 16px);
+    box-sizing: border-box;
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-md-2, 32px);
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .navbar-logo img {
+    display: block;
+    width: 48px;
+    height: 48px;
+  }
+
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-left: auto;
+  }
+
+  .navbar-link {
+    font-family: var(--font-family-body, Inter, sans-serif);
+    font-weight: 600;
+    font-size: var(--font-size-subtitle-2, 14px);
+    line-height: var(--font-line-height-subtitle-2, 20px);
+    color: var(--colour-text-intense-neutral, #282828);
+    text-decoration: none;
+    padding: var(--space-fixed-sm-2, 6px) var(--space-fixed-sm-3, 8px);
+    border-radius: 6px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    cursor: pointer;
+  }
+
+  .navbar-link:hover {
+    background-color: var(--colour-interaction-background-subtle-neutral-1-hover);
+  }
+
+  .navbar-link:active {
+    background-color: var(--colour-interaction-background-subtle-neutral-1-pressed);
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+import LibraryTextField from './LibraryTextField';
+import LibraryPhoneField from './LibraryPhoneField';
+import LibraryButton from './LibraryButton';
+import { Image } from 'astro:assets';
+---
+
+<section class="lead-gen">
+  <!-- Desktop full-bleed image — absolutely positioned, hidden on mobile -->
+  <Image
+    src="/images/property-1.png"
+    alt=""
+    class="lead-gen-bg-image"
+    width={1200}
+    height={480}
+    aria-hidden="true"
+  />
+
+  <div class="lead-gen-inner">
+    <div class="lead-gen-card">
+      <!-- Shown on mobile only — hidden on desktop where abs image takes over -->
+      <div class="lead-gen-image-wrapper">
+        <Image
+          src="/images/property-1.png"
+          alt="Book a free visit"
+          class="lead-gen-image"
+          width={656}
+          height={436}
+        />
+      </div>
+
+      <div class="lead-gen-form">
+        <h2 class="lead-gen-heading">Book a free visit today</h2>
+
+        <div class="lead-gen-fields">
+          <LibraryTextField client:load label="Full name" />
+          <LibraryTextField client:load label="City" />
+          <LibraryPhoneField client:load label="Mobile number" placeholder="Mobile number" />
+        </div>
+
+        <LibraryButton
+          client:load
+          label="Submit"
+          href="https://contact.oyoassets.com/"
+          variant="primary"
+          size="lg"
+          fullWidth
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Mobile-first base ── */
+  .lead-gen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block: var(--space-fixed-sm-5, 16px);
+    padding: var(--space-fixed-sm-3, 8px) var(--space-fixed-sm-5, 16px) var(--space-fixed-md-1, 24px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .lead-gen-inner {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .lead-gen-card {
+    background: var(--colour-background-subtle-neutral-1, #ffffff);
+    border-radius: var(--size-border-radius-xl, 16px);
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .lead-gen-image-wrapper {
+    aspect-ratio: 328 / 218;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .lead-gen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .lead-gen-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-5, 16px);
+    padding: var(--space-fixed-sm-5, 16px);
+  }
+
+  .lead-gen-heading {
+    font-family: var(--font-family-heading, 'Inter', sans-serif);
+    font-weight: 700;
+    font-size: var(--font-size-h5, 25px);
+    line-height: var(--font-line-height-h5, 30px);
+    letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+  }
+
+  .lead-gen-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-5, 16px);
+  }
+
+  /* Make astro-island block so inputs stretch full width */
+  .lead-gen-fields astro-island,
+  .lead-gen-form > astro-island {
+    display: block;
+    width: 100%;
+  }
+
+  /* Desktop full-bleed image — hidden on mobile */
+  .lead-gen-bg-image {
+    display: none;
+  }
+
+  /* ── Desktop layout ── */
+  @media (min-width: 1024px) {
+    .lead-gen {
+      position: relative;
+      padding: var(--space-fixed-md-4, 48px) var(--space-fixed-sm-5, 16px);
+      min-height: 480px;
+    }
+
+    /* Absolute full-bleed background image */
+    .lead-gen-bg-image {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .lead-gen-inner {
+      justify-content: flex-end;
+      align-items: center;
+      position: relative; /* stack above the abs image */
+      z-index: 1;
+    }
+
+    .lead-gen-card {
+      max-width: 444px;
+      box-shadow:
+        0px 11px 15px rgba(0, 0, 0, 0.06),
+        0px 9px 46px rgba(0, 0, 0, 0.04),
+        0px 24px 38px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Hide the card image — full-bleed img takes over */
+    .lead-gen-image-wrapper {
+      display: none;
+    }
+
+    .lead-gen-form {
+      padding: var(--space-fixed-md-1, 24px);
+    }
+  }
+</style>

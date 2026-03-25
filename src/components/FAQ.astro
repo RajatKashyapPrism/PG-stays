@@ -1,0 +1,165 @@
+---
+const faqs = [
+  {
+    question: "What is included in the monthly rent?",
+    answer:
+      "The monthly rent typically includes accommodation, meals (breakfast, lunch, dinner), high-speed Wi-Fi, daily housekeeping, and 24/7 security. Specific inclusions may vary by property, so please check the details for each PG.",
+  },
+  {
+    question: "What is the minimum lock-in period?",
+    answer:
+      "The minimum lock-in period is typically 1 month. However, some properties may have different terms. We recommend checking the specific PG listing for lock-in period details before booking.",
+  },
+  {
+    question: "Are there options for both male and female PGs?",
+    answer:
+      "Yes, we offer a wide range of PG accommodations catering to both male and female students and professionals. You can use our gender filter to find suitable options.",
+  },
+  {
+    question: "How do I book a visit to a PG property?",
+    answer:
+      "Booking a visit is simple — click \"Schedule a Visit\" on any property listing, choose a convenient date and time, and our team will confirm your appointment. You can also call us directly to arrange a tour.",
+  },
+];
+---
+
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <h2 class="faq-heading">FAQs</h2>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((item, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary class="faq-question">
+            <span>{item.question}</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5L10 12.5L15 7.5" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p class="faq-answer">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-fixed-sm-3, 8px) var(--space-fixed-sm-5, 16px) var(--space-fixed-md-1, 24px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .faq-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  /* Header */
+  .faq-header {
+    padding: var(--space-fixed-sm-5, 16px) 0 var(--space-fixed-sm-3, 8px);
+  }
+
+  .faq-heading {
+    font-family: var(--font-family-heading, 'Inter', sans-serif);
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h5, 25px);
+    line-height: var(--font-line-height-h5, 30px);
+    letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+  }
+
+  /* List */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Item */
+  .faq-item {
+    border-bottom: 1px solid var(--colour-border-subtle-neutral, #e8e8e8);
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--colour-border-subtle-neutral, #e8e8e8);
+  }
+
+  /* Remove default marker */
+  .faq-item summary {
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-fixed-sm-3, 8px);
+    padding: var(--space-fixed-sm-4, 12px) 0;
+    cursor: pointer;
+    font-family: var(--font-family-body, 'Inter', sans-serif);
+    font-weight: 700;
+    font-size: var(--font-size-subtitle-1, 16px);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, -0.3px);
+    color: var(--colour-text-intense-neutral, #282828);
+    user-select: none;
+  }
+
+  .faq-question:hover {
+    opacity: 0.8;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    font-family: var(--font-family-body, 'Inter', sans-serif);
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-subtitle-2, 14px);
+    line-height: var(--font-line-height-subtitle-2, 22px);
+    letter-spacing: var(--font-letter-spacing-subtitle-2-regular, 0px);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    margin: 0 0 var(--space-fixed-sm-4, 12px);
+    padding-right: 28px;
+  }
+
+  /* Responsive */
+  @media (min-width: 1024px) {
+    .faq {
+      padding-left: var(--space-fixed-md-4, 48px);
+      padding-right: var(--space-fixed-md-4, 48px);
+    }
+
+    .faq-heading {
+      font-size: var(--font-size-h4, 32px);
+      line-height: var(--font-line-height-h4, 40px);
+      letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .faq {
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+  }
+</style>

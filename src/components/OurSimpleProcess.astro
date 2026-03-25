@@ -24,14 +24,16 @@ const steps = [
 ---
 
 <section class="our-simple-process">
-  <div class="process-container">
-    <!-- Header -->
+  <!-- Header -->
+  <div class="process-header-wrapper">
     <div class="process-header">
       <h2 class="process-title">Our simple process</h2>
       <p class="process-subtitle">Find and move into your perfect PG in just three easy steps</p>
     </div>
+  </div>
 
-    <!-- Steps Grid -->
+  <!-- Steps -->
+  <div class="process-content-wrapper">
     <div class="steps-grid">
       {steps.map((step) => (
         <div class="step-card">
@@ -50,68 +52,81 @@ const steps = [
 
 <style>
   .our-simple-process {
-    background-color: var(--colour-background-subtle-neutral-1, #ffffff);
-    padding: var(--scale-100, 24px) var(--scale-200, 48px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: var(--size-border-radius-xl, 16px);
-  }
-
-  .process-container {
-    max-width: 1200px;
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--scale-150, 40px);
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    background-color: var(--colour-background-subtle-neutral-1, #ffffff);
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-top: var(--space-fixed-md-1, 24px);
+    padding-left: var(--space-fixed-md-4, 48px);
+    padding-right: var(--space-fixed-md-4, 48px);
+    border-radius: var(--size-border-radius-xl, 16px);
+    width: 100%;
+  }
+
+  /* ── Header ── */
+  .process-header-wrapper {
+    max-width: 1200px;
+    width: 100%;
   }
 
   .process-header {
     display: flex;
     flex-direction: column;
-    gap: var(--fixed-8, 8px);
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    padding-top: var(--space-fixed-sm-5, 16px);
     text-align: center;
+    width: 100%;
   }
 
   .process-title {
-    font-family: var(--font-family-heading, "Inter");
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading, 700);
     font-size: var(--font-size-h4, 32px);
-    font-weight: var(--font-weight-high, 700);
     line-height: var(--font-line-height-h4, 40px);
     letter-spacing: var(--font-letter-spacing-h4, -0.6px);
     color: var(--colour-text-intense-neutral, #282828);
+    font-feature-settings: 'ss01' 1, 'cv06' 1, 'cv05' 1, 'cv08' 1, 'cv10' 1;
     margin: 0;
   }
 
   .process-subtitle {
-    font-family: var(--font-family-body, "Inter");
-    font-size: var(--font-size-subtitle-1, 16px);
+    font-family: var(--font-family-body);
     font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-subtitle-1, 16px);
     line-height: var(--font-line-height-subtitle-1, 24px);
     letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
     color: var(--colour-text-moderate-neutral, #6c6c6c);
+    font-feature-settings: 'ss01' 1, 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1;
     margin: 0;
+  }
+
+  /* ── Steps ── */
+  .process-content-wrapper {
+    max-width: 1200px;
+    width: 100%;
   }
 
   .steps-grid {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--fixed-24, 24px);
+    gap: var(--space-fixed-md-1, 24px);
     justify-content: center;
+    width: 100%;
   }
 
   .step-card {
     display: flex;
     flex-direction: column;
-    gap: var(--fixed-16, 16px);
+    gap: var(--space-fixed-sm-5, 16px);
     align-items: center;
-    justify-content: center;
     flex: 1 0 0;
     max-width: 400px;
     min-width: 148px;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
   }
 
   .step-card:hover {
@@ -136,7 +151,7 @@ const steps = [
   .step-content {
     display: flex;
     flex-direction: column;
-    gap: var(--fixed-8, 8px);
+    gap: var(--space-fixed-sm-3, 8px);
     align-items: center;
     text-align: center;
     width: 100%;
@@ -162,19 +177,38 @@ const steps = [
     margin: 0;
   }
 
-  @media (max-width: 768px) {
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
     .our-simple-process {
-      padding: var(--fixed-8, 8px) var(--fixed-16, 16px) var(--fixed-24, 24px);
+      padding-left: var(--space-fixed-md-2, 32px);
+      padding-right: var(--space-fixed-md-2, 32px);
     }
 
-    .process-container {
-      gap: var(--fixed-8, 8px);
+    .steps-grid {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .our-simple-process {
+      padding-left: var(--space-fixed-md-1, 24px);
+      padding-right: var(--space-fixed-md-1, 24px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .our-simple-process {
+      gap:0;
+      padding-top: var(--space-fixed-sm-3, 8px);
+      padding-bottom: var(--space-fixed-md-1, 24px);
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+      overflow: clip;
     }
 
     .process-header {
       align-items: flex-start;
       text-align: left;
-      padding: var(--fixed-16, 16px) 0 var(--fixed-8, 8px);
     }
 
     .process-title {
@@ -185,17 +219,18 @@ const steps = [
 
     .steps-grid {
       flex-direction: column;
-      gap: 0;
+      gap:0;
+      align-items: flex-start;
     }
 
     .step-card {
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      min-width: 100%;
-      max-width: 100%;
-      gap: var(--fixed-16, 16px);
-      padding: var(--fixed-16, 16px) 0;
+      max-width: 400px;
+      min-width: 128px;
+      padding-top: var(--space-fixed-sm-3, 8px);
+      padding-bottom: var(--space-fixed-sm-3, 8px);
     }
 
     .step-card:hover {
@@ -203,27 +238,15 @@ const steps = [
     }
 
     .step-image {
-      width: 72px;
-      height: 72px;
+      width: 88px;
+      height: 88px;
       flex-shrink: 0;
     }
 
     .step-content {
       align-items: flex-start;
       text-align: left;
-    }
-
-    .step-title {
-      font-size: var(--font-size-subtitle-1, 16px);
-      font-weight: var(--font-weight-high, 700);
-      line-height: var(--font-line-height-subtitle-1, 24px);
-      letter-spacing: var(--font-letter-spacing-subtitle-1-high, -0.3px);
-    }
-
-    .step-description {
-      font-size: var(--font-size-subtitle-2, 14px);
-      line-height: var(--font-line-height-subtitle-2, 22px);
-      letter-spacing: var(--font-letter-spacing-subtitle-2-regular, 0px);
+      gap: var(--space-fixed-sm-2, 4px);
     }
   }
 </style>

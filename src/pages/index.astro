@@ -1,4 +1,5 @@
 ---
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Recco01 from '../components/Recco01.astro';
 import ModernStandard from '../components/ModernStandard.astro';
@@ -6,6 +7,8 @@ import Recco02 from '../components/Recco02.astro';
 import OurSimpleProcess from '../components/OurSimpleProcess.astro';
 import Amenities from '../components/Amenities.astro';
 import Testimonials from '../components/Testimonials.astro';
+import LeadGenForm from '../components/LeadGenForm.astro';
+import FAQ from '../components/FAQ.astro';
 import '../styles/global.css';
 ---
 
@@ -21,6 +24,9 @@ import '../styles/global.css';
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 		<title>Premium PG Living - Zero Hassle</title>
 	<style>
+		html {
+			scroll-behavior: smooth;
+		}
 		body {
 			display: flex;
 			flex-direction: column;
@@ -30,6 +36,7 @@ import '../styles/global.css';
 	</style>
 	</head>
 	<body>
+		<Navbar />
 		<Hero />
 		<Recco01 />
 		<ModernStandard />
@@ -37,5 +44,7 @@ import '../styles/global.css';
 		<OurSimpleProcess />
 		<Amenities />
 		<Testimonials />
+		<LeadGenForm />
+		<FAQ />
 	</body>
 </html>
