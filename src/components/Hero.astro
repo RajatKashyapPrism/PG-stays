@@ -18,20 +18,20 @@ import { Image } from 'astro:assets';
       </p>
     </div>
 
-    <div class="contact-form">
-      <LibraryTextField client:load label="Full name" />
-      <LibraryTextField client:load label="City" />
-      <LibraryPhoneField client:load label="Mobile number" placeholder="Mobile number" />
-    </div>
-
-    <LibraryButton
-      client:load
-      label="Book a free visit"
-      href="https://contact.oyoassets.com/"
-      variant="primary"
-      size="lg"
-      fullWidth
-    />
+    <form class="contact-form" action="https://contact.oyoassets.com/" method="get">
+      <input type="hidden" name="source" value="hero" />
+      <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired />
+      <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired />
+      <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
+      <LibraryButton
+        client:load
+        label="Book a free visit"
+        variant="primary"
+        size="lg"
+        fullWidth
+        type="submit"
+      />
+    </form>
   </section>
 
   <div class="hero-image-wrapper">

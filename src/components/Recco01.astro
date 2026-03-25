@@ -3,18 +3,22 @@ import PropertyCard from './PropertyCard.astro';
 import LibraryButton from './LibraryButton';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import { isPublishedProperty } from '../lib/content';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const allProperties = await reader.collections.properties.all();
 const cards = allProperties
+  .filter(({ entry }) => isPublishedProperty(entry))
   .sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));
 ---
 
+{cards.length > 0 && (
+<>
 <section class="recco-01">
   <!-- Header -->
   <div class="recco-header-wrapper">
     <div class="recco-header">
-      <p class="recco-heading">Premium PG's in Bangalore</p>
+      <p class="recco-heading">Premium PGs in Bengaluru</p>
       <!-- Carousel nav (desktop only) -->
       <div class="carousel-nav">
         <button class="nav-btn nav-btn--prev" aria-label="Scroll left">
@@ -304,3 +308,5 @@ const cards = allProperties
 
   document.addEventListener('DOMContentLoaded', initCarousel);
 </script>
+</>
+)}

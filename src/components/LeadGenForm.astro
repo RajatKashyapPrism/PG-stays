@@ -32,20 +32,20 @@ import { Image } from 'astro:assets';
       <div class="lead-gen-form">
         <h2 class="lead-gen-heading">Book a free visit today</h2>
 
-        <div class="lead-gen-fields">
-          <LibraryTextField client:load label="Full name" />
-          <LibraryTextField client:load label="City" />
-          <LibraryPhoneField client:load label="Mobile number" placeholder="Mobile number" />
-        </div>
-
-        <LibraryButton
-          client:load
-          label="Submit"
-          href="https://contact.oyoassets.com/"
-          variant="primary"
-          size="lg"
-          fullWidth
-        />
+        <form class="lead-gen-fields" action="https://contact.oyoassets.com/" method="get">
+          <input type="hidden" name="source" value="footer" />
+          <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired />
+          <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired />
+          <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
+          <LibraryButton
+            client:load
+            label="Submit"
+            variant="primary"
+            size="lg"
+            fullWidth
+            type="submit"
+          />
+        </form>
       </div>
     </div>
   </div>
