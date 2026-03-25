@@ -1,0 +1,201 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  location?: string | null;
+  rating?: number | null;
+  timeAgo?: string | null;
+}
+
+const { quote, name, location, rating = 5, timeAgo } = Astro.props;
+
+const stars = Array.from({ length: 5 }, (_, i) => {
+  const pos = i + 1;
+  const r = rating ?? 5;
+  if (pos <= Math.floor(r)) return 'full';
+  if (pos === Math.ceil(r) && r % 1 !== 0) return 'half';
+  return 'empty';
+});
+---
+
+<div class="testimonial-card">
+  <!-- Quote icon — left column -->
+  <svg class="quote-icon" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" fill="currentColor">
+    <path d="M0 26.667V18C0 11.555 2.889 6.889 8.667 4L11.333 6.667C8.222 8.444 6.556 11.111 6.222 14.667H13.333V26.667H0ZM21.333 26.667V18C21.333 11.555 24.222 6.889 30 4L32.667 6.667C29.556 8.444 27.889 11.111 27.556 14.667H34.667V26.667H21.333Z"/>
+  </svg>
+
+  <!-- Content column — right -->
+  <div class="testimonial-content">
+    <p class="testimonial-quote">{quote}</p>
+
+    <div class="testimonial-details">
+      <!-- Stars + time -->
+      <div class="testimonial-rating">
+        <div class="testimonial-stars" aria-label={`${rating} out of 5 stars`}>
+          {stars.map((type) => (
+            type === 'full' ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 1.33334L10.06 5.50668L14.6667 6.18001L11.3333 9.42668L12.12 14.0133L8 11.8467L3.88 14.0133L4.66667 9.42668L1.33333 6.18001L5.94 5.50668L8 1.33334Z" fill="var(--colour-background-intense-rating-filled)" stroke="var(--colour-background-intense-rating-filled)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            ) : type === 'half' ? (
+              <span class="star-half" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="star-bg">
+                  <path d="M8 1.33334L10.06 5.50668L14.6667 6.18001L11.3333 9.42668L12.12 14.0133L8 11.8467L3.88 14.0133L4.66667 9.42668L1.33333 6.18001L5.94 5.50668L8 1.33334Z" fill="none" stroke="var(--colour-background-intense-rating-unfilled)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="star-fill">
+                  <path d="M8 1.33334L10.06 5.50668L14.6667 6.18001L11.3333 9.42668L12.12 14.0133L8 11.8467L3.88 14.0133L4.66667 9.42668L1.33333 6.18001L5.94 5.50668L8 1.33334Z" fill="var(--colour-background-intense-rating-filled)" stroke="var(--colour-background-intense-rating-filled)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 1.33334L10.06 5.50668L14.6667 6.18001L11.3333 9.42668L12.12 14.0133L8 11.8467L3.88 14.0133L4.66667 9.42668L1.33333 6.18001L5.94 5.50668L8 1.33334Z" fill="none" stroke="var(--colour-background-intense-rating-unfilled)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )
+          ))}
+        </div>
+        {timeAgo && <span class="testimonial-time">{timeAgo}</span>}
+      </div>
+
+      <!-- Name + location on separate lines -->
+      <div class="testimonial-name">
+        <span>{name}</span>
+        {location && <span class="testimonial-location">{location}</span>}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Card: flex ROW — icon left, content right ── */
+  .testimonial-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-fixed-md-1, 24px);
+    padding: var(--space-fixed-md-1, 24px);
+    background: var(--colour-background-subtle-brand-secondary, #f5f5f5);
+    border-radius: var(--size-border-radius-lg, 13px);
+    overflow: clip;
+    flex: 1;
+    min-width: 296px;
+    min-height: 240px;
+  }
+
+  /* ── Quote icon — left, fixed size ── */
+  .quote-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    color: var(--colour-background-intense-rating-unfilled, #c5c5c5);
+  }
+
+  /* ── Content column — grows to fill ── */
+  .testimonial-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    min-width: 1px;
+    min-height: 1px;
+  }
+
+  /* ── Quote text — flex:1 grows to push details down; padding-bottom is the minimum gap ── */
+  .testimonial-quote {
+    flex: 1;
+    padding-bottom: var(--space-fixed-sm-5, 16px);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h5, 25px);
+    line-height: var(--font-line-height-h5, 30px);
+    letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+    overflow: hidden;
+  }
+
+  /* ── Customer details: flex column ── */
+  .testimonial-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6.5px;
+    align-items: flex-start;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  /* ── Ratings row: stars + time ── */
+  .testimonial-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6.5px;
+  }
+
+  .testimonial-stars {
+    display: flex;
+    align-items: center;
+    gap: var(--space-fixed-sm-1, 4px);
+  }
+
+  .star-half {
+    position: relative;
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .star-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 50% 0 0);
+  }
+
+  .testimonial-time {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-caption, 12px);
+    line-height: var(--font-line-height-caption, 16px);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    white-space: nowrap;
+  }
+
+  /* ── Name + location: two lines ── */
+  .testimonial-name {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-medium, 600);
+    font-size: var(--font-size-caption, 12px);
+    line-height: var(--font-line-height-caption, 16px);
+    color: var(--colour-text-intense-neutral, #282828);
+  }
+
+  .testimonial-location {
+    font-weight: var(--font-weight-regular, 400);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+  }
+
+  /* ── Mobile scroll snap ── */
+  @media (max-width: 640px) {
+    .testimonial-card {
+      scroll-snap-align: start;
+      flex: 0 0 300px;
+      min-width: 0;
+    }
+
+    .testimonial-quote {
+      font-size: var(--font-size-h6, 20px);
+      line-height: var(--font-line-height-h6, 26px);
+      letter-spacing: var(--font-letter-spacing-h6, -0.4px);
+    }
+  }
+</style>

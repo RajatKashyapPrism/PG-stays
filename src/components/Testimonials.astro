@@ -1,0 +1,219 @@
+---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+import TestimonialCard from './TestimonialCard.astro';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const testimonials = await reader.collections.testimonials.all();
+const sorted = testimonials.sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));
+---
+
+<section class="testimonials">
+  <!-- Header -->
+  <div class="testimonials-header-wrapper">
+    <div class="testimonials-header">
+      <p class="testimonials-heading">Voices of choice</p>
+      <p class="testimonials-subtitle">Thousands of happy residents call PG Stays home.</p>
+    </div>
+  </div>
+
+  <!-- Marquee viewport -->
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <!-- Primary set -->
+      {sorted.map(({ entry }) => (
+        <TestimonialCard
+          quote={entry.quote}
+          name={entry.name}
+          location={entry.location}
+          rating={entry.rating}
+          timeAgo={entry.timeAgo}
+        />
+      ))}
+      <!-- Duplicate set for seamless loop -->
+      {sorted.map(({ entry }) => (
+        <div aria-hidden="true">
+          <TestimonialCard
+            quote={entry.quote}
+            name={entry.name}
+            location={entry.location}
+            rating={entry.rating}
+            timeAgo={entry.timeAgo}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-top: var(--space-fixed-md-1, 24px);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .testimonials-header-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    padding-left: var(--space-fixed-md-4, 48px);
+    padding-right: var(--space-fixed-md-4, 48px);
+  }
+
+  .testimonials-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    padding-top: var(--space-fixed-sm-5, 16px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .testimonials-heading {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h4, 32px);
+    line-height: var(--font-line-height-h4, 40px);
+    letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    color: var(--colour-text-intense-neutral, #282828);
+    font-feature-settings: 'ss01' 1, 'cv06' 1, 'cv05' 1, 'cv08' 1, 'cv10' 1;
+    margin: 0;
+  }
+
+  .testimonials-subtitle {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-regular, 400);
+    font-size: var(--font-size-subtitle-1, 16px);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    font-feature-settings: 'ss01' 1, 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1;
+    margin: 0;
+  }
+
+  /* ── Marquee viewport: clips overflow, fades edges ── */
+  .marquee-viewport {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  /* ── Marquee track: all cards in a single row, animating ── */
+  .marquee-track {
+    display: flex;
+    gap: var(--space-fixed-md-1, 24px);
+    width: max-content;
+    animation: marquee 40s linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause on hover so users can read comfortably */
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+    .marquee-viewport {
+      overflow-x: auto;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
+  /* ── Card sizing: fixed width so max-content layout is predictable ── */
+  .marquee-track > :global(.testimonial-card),
+  .marquee-track > [aria-hidden] > :global(.testimonial-card) {
+    flex: 0 0 360px;
+    width: 360px;
+    min-width: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .testimonials-header-wrapper {
+      padding-left: var(--space-fixed-md-2, 32px);
+      padding-right: var(--space-fixed-md-2, 32px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .testimonials-header-wrapper {
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+
+    .testimonials-header {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .testimonials-heading {
+      font-size: var(--font-size-h5, 25px);
+      line-height: var(--font-line-height-h5, 30px);
+      letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+      text-align: left;
+    }
+
+    .testimonials-subtitle {
+      text-align: left;
+    }
+
+    .marquee-track {
+      gap: var(--space-fixed-sm-5, 16px);
+    }
+
+    .marquee-track > :global(.testimonial-card),
+    .marquee-track > [aria-hidden] > :global(.testimonial-card) {
+      flex: 0 0 300px;
+      width: 300px;
+    }
+
+    .marquee-viewport {
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%
+      );
+    }
+  }
+</style>

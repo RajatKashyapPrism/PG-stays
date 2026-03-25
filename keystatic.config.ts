@@ -109,5 +109,44 @@ export default config({
         }),
       },
     }),
+    testimonials: collection({
+      label: 'Testimonials',
+      slugField: 'name',
+      path: 'src/content/testimonials/*',
+      format: { data: 'json' },
+      schema: {
+        name: fields.slug({
+          name: {
+            label: 'Reviewer Name',
+            validation: { isRequired: true },
+          },
+        }),
+        quote: fields.text({
+          label: 'Quote',
+          description: 'The testimonial text from the resident.',
+          multiline: true,
+          validation: { isRequired: true },
+        }),
+        location: fields.text({
+          label: 'Location',
+          description: 'e.g. "Bangalore" or "Koramangala, Bangalore"',
+        }),
+        timeAgo: fields.text({
+          label: 'Time Ago',
+          description: 'e.g. "3 months ago" or "2 weeks ago"',
+        }),
+        rating: fields.number({
+          label: 'Star Rating',
+          description: 'Number of stars (1–5)',
+          defaultValue: 5,
+          validation: { min: 1, max: 5 },
+        }),
+        order: fields.number({
+          label: 'Display Order',
+          description: 'Lower numbers appear first',
+          defaultValue: 0,
+        }),
+      },
+    }),
   },
 });
