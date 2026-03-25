@@ -168,6 +168,11 @@ const sorted = testimonials.sort((a, b) => (a.entry.order ?? 0) - (b.entry.order
   }
 
   @media (max-width: 640px) {
+    .testimonials {
+      padding-top: var(--space-fixed-sm-3, 8px);
+      padding-bottom: var(--space-fixed-sm-5, 16px);
+    }
+
     .testimonials-header-wrapper {
       padding-left: var(--space-fixed-sm-5, 16px);
       padding-right: var(--space-fixed-sm-5, 16px);
