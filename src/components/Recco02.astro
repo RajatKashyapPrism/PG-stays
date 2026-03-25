@@ -1,0 +1,155 @@
+---
+import PropertyCard from './PropertyCard.astro';
+import LibraryButton from './LibraryButton';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const allProperties = await reader.collections.gurugramProperties.all();
+const cards = allProperties
+  .sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));
+---
+
+<section class="recco-02">
+  <!-- Header -->
+  <div class="recco-header-wrapper">
+    <div class="recco-header">
+      <p class="recco-heading">Premium PG's in Gurugram</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="recco-content-wrapper">
+    <div class="recco-content">
+      <!-- Cards row -->
+      <div class="cards-row">
+      {cards.map((card, index) => (
+        <PropertyCard
+          images={card.entry.images.slice(0, 5)}
+          gender={card.entry.gender}
+          genderType={card.entry.genderType as "female" | "male"}
+          name={card.entry.name}
+          address={card.entry.address}
+          price={card.entry.price}
+          priority={index === 0}
+        />
+      ))}
+      </div>
+
+      <LibraryButton
+        client:load
+        label="Book a Free Visit"
+        href="https://contact.oyoassets.com/"
+        variant="tertiary"
+        size="md"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .recco-02 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    overflow: clip;
+    padding-bottom: var(--space-scale-md-3, 40px);
+    padding-top: var(--space-fixed-md-1, 24px);
+    padding-left: var(--space-fixed-md-4, 48px);
+    padding-right: var(--space-fixed-md-4, 48px);
+    border-radius: var(--size-border-radius-xl, 16px);
+    width: 100%;
+  }
+
+  /* ── Header Wrapper ── */
+  .recco-header-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .recco-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-3, 8px);
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-fixed-sm-3, 8px);
+    padding-top: var(--space-fixed-sm-5, 16px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .recco-heading {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--font-size-h4);
+    line-height: var(--font-line-height-h4);
+    letter-spacing: var(--font-letter-spacing-h4);
+    color: var(--colour-text-intense-neutral);
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  /* ── Content Wrapper ── */
+  .recco-content-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+  }
+
+  .recco-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
+    align-items: center;
+    width: 100%;
+  }
+
+  /* ── Cards row ── */
+  .cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-fixed-sm-5);
+    align-items: stretch;
+    width: 100%;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .recco-02 {
+      padding-left: var(--space-fixed-md-2, 32px);
+      padding-right: var(--space-fixed-md-2, 32px);
+    }
+
+    .cards-row {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .recco-02 {
+      padding-left: var(--space-fixed-md-1, 24px);
+      padding-right: var(--space-fixed-md-1, 24px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .recco-02 {
+      padding-left: var(--space-fixed-sm-5, 16px);
+      padding-right: var(--space-fixed-sm-5, 16px);
+    }
+
+    .recco-heading {
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.48px;
+    }
+
+    .cards-row {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+interface Props {
+  image: string;
+  label: string;
+}
+
+const { image, label } = Astro.props;
+---
+
+<div class="amenity-card">
+  <div class="amenity-image">
+    <img src={image} alt={label} loading="lazy" />
+  </div>
+  <p class="amenity-label">{label}</p>
+</div>
+
+<style>
+  .amenity-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-fixed-sm-5, 16px);
+    align-items: center;
+    flex: 1 0 0;
+    padding: var(--space-fixed-md-1, 24px);
+    border: 1px solid var(--colour-border-subtle-neutral, #ddd);
+    border-radius: var(--size-border-radius-xl, 16px);
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+  }
+
+  .amenity-image {
+    max-width: 100%;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+
+  .amenity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .amenity-label {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-heading, 700);
+    font-size: var(--font-size-h6, 20px);
+    line-height: var(--font-line-height-h6, 26px);
+    letter-spacing: var(--font-letter-spacing-h6, -0.35px);
+    color: var(--colour-text-intense-neutral, #282828);
+    font-feature-settings: 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1, 'cv10' 1, 'ss01' 1, 'ss03' 1, 'cv09' 1;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .amenity-card {
+      min-width: var(--scale-1400, 128px);
+      gap: var(--space-fixed-sm-3, 8px);
+      padding: var(--space-fixed-sm-4, 12px);
+    }
+
+    .amenity-label {
+      font-weight: var(--font-weight-high, 700);
+      font-size: var(--font-size-subtitle-2, 14px);
+      line-height: var(--font-line-height-subtitle-2, 22px);
+      letter-spacing: var(--font-letter-spacing-subtitle-2-high, -0.1px);
+    }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+// Images from Figma design
+const imgFindARoom = "https://www.figma.com/api/mcp/asset/09689659-82a2-47db-af54-a35dc493ac27";
+const imgBookFreeVisit = "https://www.figma.com/api/mcp/asset/f2e942ff-d6b9-4b89-bddd-4f054f9c4796";
+const imgMoveInNoBrokerage = "https://www.figma.com/api/mcp/asset/d97f9e73-4e30-489a-be5d-0e636d8f231c";
+
+const steps = [
+  {
+    image: imgFindARoom,
+    title: "Find a room",
+    description: "Browse PG rooms in your preferred city"
+  },
+  {
+    image: imgBookFreeVisit,
+    title: "Book a free visit",
+    description: "Schedule a visit to explore the property"
+  },
+  {
+    image: imgMoveInNoBrokerage,
+    title: "Move in - No brokerage",
+    description: "Confirm booking and move in with zero brokerage"
+  }
+];
+---
+
+<section class="our-simple-process">
+  <div class="process-container">
+    <!-- Header -->
+    <div class="process-header">
+      <h2 class="process-title">Our simple process</h2>
+      <p class="process-subtitle">Find and move into your perfect PG in just three easy steps</p>
+    </div>
+
+    <!-- Steps Grid -->
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <div class="step-card">
+          <div class="step-image">
+            <img src={step.image} alt={step.title} />
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-description">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .our-simple-process {
+    background-color: var(--colour-background-subtle-neutral-1, #ffffff);
+    padding: var(--scale-100, 24px) var(--scale-200, 48px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: var(--size-border-radius-xl, 16px);
+  }
+
+  .process-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--scale-150, 40px);
+  }
+
+  .process-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fixed-8, 8px);
+    text-align: center;
+  }
+
+  .process-title {
+    font-family: var(--font-family-heading, "Inter");
+    font-size: var(--font-size-h4, 32px);
+    font-weight: var(--font-weight-high, 700);
+    line-height: var(--font-line-height-h4, 40px);
+    letter-spacing: var(--font-letter-spacing-h4, -0.6px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+  }
+
+  .process-subtitle {
+    font-family: var(--font-family-body, "Inter");
+    font-size: var(--font-size-subtitle-1, 16px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    margin: 0;
+  }
+
+  .steps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--fixed-24, 24px);
+    justify-content: center;
+  }
+
+  .step-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fixed-16, 16px);
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 0;
+    max-width: 400px;
+    min-width: 148px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .step-image {
+    width: 148px;
+    height: 148px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fixed-8, 8px);
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .step-title {
+    font-family: var(--font-family-heading, "Inter");
+    font-size: var(--font-size-h6, 20px);
+    font-weight: var(--font-weight-high, 700);
+    line-height: var(--font-line-height-h6, 26px);
+    letter-spacing: var(--font-letter-spacing-h6, -0.35px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+  }
+
+  .step-description {
+    font-family: var(--font-family-body, "Inter");
+    font-size: var(--font-size-subtitle-1, 16px);
+    font-weight: var(--font-weight-regular, 400);
+    line-height: var(--font-line-height-subtitle-1, 24px);
+    letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    color: var(--colour-text-intense-neutral, #282828);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .our-simple-process {
+      padding: var(--fixed-8, 8px) var(--fixed-16, 16px) var(--fixed-24, 24px);
+    }
+
+    .process-container {
+      gap: var(--fixed-8, 8px);
+    }
+
+    .process-header {
+      align-items: flex-start;
+      text-align: left;
+      padding: var(--fixed-16, 16px) 0 var(--fixed-8, 8px);
+    }
+
+    .process-title {
+      font-size: var(--font-size-h5, 25px);
+      line-height: var(--font-line-height-h5, 30px);
+      letter-spacing: var(--font-letter-spacing-h5, -0.5px);
+    }
+
+    .steps-grid {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      min-width: 100%;
+      max-width: 100%;
+      gap: var(--fixed-16, 16px);
+      padding: var(--fixed-16, 16px) 0;
+    }
+
+    .step-card:hover {
+      transform: none;
+    }
+
+    .step-image {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .step-title {
+      font-size: var(--font-size-subtitle-1, 16px);
+      font-weight: var(--font-weight-high, 700);
+      line-height: var(--font-line-height-subtitle-1, 24px);
+      letter-spacing: var(--font-letter-spacing-subtitle-1-high, -0.3px);
+    }
+
+    .step-description {
+      font-size: var(--font-size-subtitle-2, 14px);
+      line-height: var(--font-line-height-subtitle-2, 22px);
+      letter-spacing: var(--font-letter-spacing-subtitle-2-regular, 0px);
+    }
+  }
+</style>

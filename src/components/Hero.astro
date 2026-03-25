@@ -206,32 +206,35 @@ import { Image } from 'astro:assets';
 
   @media (max-width: 640px) {
     .hero {
+      padding-top: var(--space-fixed-sm-3, 8px);
+      padding-bottom: var(--space-fixed-md-1, 24px);
       padding-left: var(--space-fixed-sm-5, 16px);
       padding-right: var(--space-fixed-sm-5, 16px);
-      gap: 0;
+      gap: var(--space-fixed-sm-3, 8px);
     }
 
     .hero-wrapper {
-      gap: 0;
+      flex-direction: column;
+      gap: var(--space-fixed-sm-3, 8px);
+    }
+
+    .hero-image-wrapper {
+      order: -1;
+      width: 100%;
+      min-height: unset;
+      aspect-ratio: 328 / 218;
+    }
+
+    .hero-image {
+      height: 100%;
     }
 
     .hero-content {
       max-width: 100%;
-      padding-top: var(--space-fixed-md-1, 24px);
+      padding-top: var(--space-fixed-sm-5, 16px);
       padding-left: 0;
       padding-right: 0;
-    }
-
-    .main-title {
-      font-size: 24px;
-      line-height: 32px;
-      letter-spacing: -0.48px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      line-height: 20px;
-      letter-spacing: 0px;
+      gap: var(--space-fixed-sm-5, 16px);
     }
   }
 </style>

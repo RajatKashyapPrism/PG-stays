@@ -160,6 +160,17 @@ const imageLoading = priority ? 'eager' : 'lazy';
       0px 2px 6px 0px rgba(0, 0, 0, 0.02),
       0px 2px 5px 0px rgba(0, 0, 0, 0.04),
       0px 6px 5px 0px rgba(0, 0, 0, 0.01);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .property-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0px 0px 4px 0px rgba(0, 0, 0, 0.072),
+      0px 4px 8px 0px rgba(0, 0, 0, 0.072),
+      0px 6px 16px 0px rgba(0, 0, 0, 0.048),
+      0px 8px 12px 0px rgba(0, 0, 0, 0.048),
+      0px 12px 12px 0px rgba(0, 0, 0, 0.024);
   }
 
   /* ── Card image ── */
