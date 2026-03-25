@@ -198,7 +198,7 @@ const steps = [
 
   @media (max-width: 640px) {
     .our-simple-process {
-      gap:0;
+      gap:
       padding-top: var(--space-fixed-sm-3, 8px);
       padding-bottom: var(--space-fixed-md-1, 24px);
       padding-left: var(--space-fixed-sm-5, 16px);
@@ -247,6 +247,17 @@ const steps = [
       align-items: flex-start;
       text-align: left;
       gap: var(--space-fixed-sm-2, 4px);
+    }
+
+    .step-title {
+      font-size: var(--font-size-subtitle-1, 16px);
+      line-height: var(--font-line-height-subtitle-1, 24px);
+      letter-spacing: var(--font-letter-spacing-subtitle-1-regular, 0px);
+    }
+
+    .step-description {
+      font-size: var(--font-size-subtitle-2, 14px);
+      line-height: var(--font-line-height-subtitle-2, 22px);
     }
   }
 </style>
