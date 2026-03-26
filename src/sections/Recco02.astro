@@ -8,7 +8,7 @@ import { isPublishedProperty } from '../lib/content';
 const reader = createReader(process.cwd(), keystaticConfig);
 const allProperties = await reader.collections.gurugramProperties.all();
 const cards = allProperties
-  .filter(({ entry }) => isPublishedProperty(entry))
+  .filter(({ entry }) => isPublishedProperty({ ...entry, images: [...entry.images], order: entry.order ?? undefined }))
   .sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));
 ---
 
