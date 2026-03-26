@@ -1,0 +1,15 @@
+{
+  "name": "Super PG 3",
+  "address": "Hosahalli Gollarapalya, Gollarhalli, Bangalore",
+  "gender": "Boys only",
+  "genderType": "male",
+  "price": "₹9,500",
+  "images": [
+    "https://images.oyoroomscdn.com/uploads/hotel_image/328178/medium/oegylvxjiybf.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/328178/medium/ugtcwkolrwhi.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/328178/medium/ietqdovchgqq.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/328178/medium/tcfioodoecff.jpg",
+    "https://images.oyoroomscdn.com/uploads/hotel_image/328178/medium/mmijwicridks.jpg"
+  ],
+  "order": 0
+}
