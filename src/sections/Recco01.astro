@@ -1,12 +1,12 @@
 ---
-import PropertyCard from './PropertyCard.astro';
-import LibraryButton from './LibraryButton';
+import PropertyCard from '../components/PropertyCard.astro';
+import LibraryButton from '../components/LibraryButton';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import { isPublishedProperty } from '../lib/content';
 
 const reader = createReader(process.cwd(), keystaticConfig);
-const allProperties = await reader.collections.properties.all();
+const allProperties = await reader.collections.bangaloreProperties.all();
 const cards = allProperties
   .filter(({ entry }) => isPublishedProperty(entry))
   .sort((a, b) => (a.entry.order ?? 0) - (b.entry.order ?? 0));

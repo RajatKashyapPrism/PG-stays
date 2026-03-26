@@ -5,7 +5,7 @@ export default config({
     kind: 'local',
   },
   collections: {
-    properties: collection({
+    bangaloreProperties: collection({
       label: 'Bangalore Properties',
       slugField: 'name',
       path: 'src/content/bangaloreProperties/*',
