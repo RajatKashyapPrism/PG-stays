@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/img-to-webp.cjs\"",
+            "statusMessage": "Converting image to WebP...",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
