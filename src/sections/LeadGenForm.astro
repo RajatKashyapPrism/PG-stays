@@ -57,7 +57,8 @@ import { Image } from 'astro:assets';
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-block: var(--space-fixed-sm-5, 16px);
+    margin-top: var(--space-fixed-sm-5, 16px);
+    margin-bottom: var(--space-fixed-sm-5, 16px);
     padding: var(--space-fixed-sm-3, 8px) var(--space-fixed-sm-5, 16px) var(--space-fixed-sm-5, 16px);
     scroll-margin-top: 96px;
     width: 100%;
@@ -131,7 +132,9 @@ import { Image } from 'astro:assets';
   @media (min-width: 1024px) {
     .lead-gen {
       position: relative;
-      padding: var(--space-fixed-md-4, 48px) var(--space-fixed-sm-5, 16px);
+      padding: var(--space-scale-md-3, 40px);
+      margin-top: var(--space-fixed-md-5, 64px);
+      margin-bottom: var(--space-fixed-md-5, 64px);
       min-height: 480px;
     }
 
