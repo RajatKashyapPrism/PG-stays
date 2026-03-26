@@ -2,32 +2,32 @@
 const cities = [
   {
     title: 'Bengaluru',
-    image: 'https://www.figma.com/api/mcp/asset/ae97fe79-b1b6-4e9c-a3d7-e3a3a4dffcf5',
+    image: '/images/city-bengaluru.webp',
     imageClass: 'city-tile__image--bengaluru',
   },
   {
     title: 'Hyderabad',
-    image: 'https://www.figma.com/api/mcp/asset/6c20832e-d03c-452b-9b37-ef39e3c5614d',
+    image: '/images/city-hyderabad.webp',
     imageClass: 'city-tile__image--hyderabad',
   },
   {
     title: 'Gurugram',
-    image: 'https://www.figma.com/api/mcp/asset/8bd64ee0-1c69-4e59-9bf9-9264199d2f30',
+    image: '/images/city-gurugram.webp',
     imageClass: 'city-tile__image--gurgaon',
   },
   {
     title: 'Pune',
-    image: 'https://www.figma.com/api/mcp/asset/3881062f-4473-440c-9a7b-d3786c76b0f2',
+    image: '/images/city-pune.webp',
     imageClass: 'city-tile__image--pune',
   },
   {
     title: 'Mumbai',
-    image: 'https://www.figma.com/api/mcp/asset/f6211dbe-31e4-4c0a-8591-8cc4d40402a1',
+    image: '/images/city-mumbai.webp',
     imageClass: 'city-tile__image--mumbai',
   },
   {
     title: 'Noida',
-    image: 'https://www.figma.com/api/mcp/asset/7f3917eb-9bd2-40be-af3b-9a17f95a2721',
+    image: '/images/city-noida.webp',
     imageClass: 'city-tile__image--noida',
   },
 ];
@@ -41,8 +41,8 @@ const cities = [
     </div>
   </div>
 
-  <div class="top-cities__grid-wrap">
-    <div class="top-cities__grid">
+  <div class="top-cities__content-wrap">
+    <div class="top-cities__row">
       {cities.map((city) => (
         <article class="city-tile" aria-label={city.title}>
           <div class="city-tile__media">
@@ -75,7 +75,7 @@ const cities = [
   }
 
   .top-cities__header-wrap,
-  .top-cities__grid-wrap {
+  .top-cities__content-wrap {
     width: 100%;
     max-width: 1200px;
   }
@@ -116,16 +116,19 @@ const cities = [
     font-feature-settings: 'ss01' 1, 'cv01' 1, 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv05' 1, 'cv06' 1, 'cv08' 1;
   }
 
-  .top-cities__grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+  .top-cities__row {
+    display: flex;
     gap: var(--space-fixed-md-1, 24px);
+    align-items: stretch;
     width: 100%;
   }
 
   .city-tile {
     position: relative;
+    flex: 1 0 0;
     aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: calc((100% - (5 * var(--space-fixed-md-1, 24px))) / 6);
     min-width: 0;
     overflow: clip;
     border-radius: var(--size-border-radius-xl, 16px);
@@ -213,8 +216,15 @@ const cities = [
       gap: var(--space-fixed-sm-5, 16px);
       border-radius: var(--size-border-radius-xl, 16px);
       padding-top: var(--space-fixed-sm-3, 8px);
-      padding-right: var(--space-fixed-sm-5, 16px);
       padding-bottom: var(--space-fixed-md-1, 24px);
+      padding-right: 0;
+      padding-left: 0;
+      overflow: visible;
+      align-items: stretch;
+    }
+
+    .top-cities__header-wrap {
+      padding-right: var(--space-fixed-sm-5, 16px);
       padding-left: var(--space-fixed-sm-5, 16px);
     }
 
@@ -229,9 +239,34 @@ const cities = [
       letter-spacing: var(--font-letter-spacing-h5, -0.5px);
     }
 
-    .top-cities__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .top-cities__content-wrap {
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .top-cities__row {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: var(--space-fixed-sm-5, 16px);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-right: var(--space-fixed-sm-5, 16px);
+      padding-bottom: var(--fixed-50, 4px);
+      padding-left: var(--space-fixed-sm-5, 16px);
       gap: var(--space-fixed-sm-5, 16px);
+    }
+
+    .top-cities__row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .city-tile {
+      scroll-snap-align: start;
+      flex: 0 0 var(--scale-1400, 128px);
+      min-width: var(--scale-1400, 128px);
+      max-width: none;
     }
 
     .city-tile__title {
