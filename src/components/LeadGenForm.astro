@@ -5,7 +5,7 @@ import LibraryButton from './LibraryButton';
 import { Image } from 'astro:assets';
 ---
 
-<section class="lead-gen">
+<section id="lead-gen-form" class="lead-gen">
   <!-- Desktop full-bleed image — absolutely positioned, hidden on mobile -->
   <Image
     src="/images/img_hero.webp"
@@ -59,6 +59,7 @@ import { Image } from 'astro:assets';
     align-items: center;
     margin-block: var(--space-fixed-sm-5, 16px);
     padding: var(--space-fixed-sm-3, 8px) var(--space-fixed-sm-5, 16px) var(--space-fixed-sm-5, 16px);
+    scroll-margin-top: 96px;
     width: 100%;
     box-sizing: border-box;
   }

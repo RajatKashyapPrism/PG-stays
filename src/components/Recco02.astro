@@ -62,6 +62,7 @@ const cards = allProperties
     <LibraryButton
       client:load
       label="Book a free visit"
+      scrollTarget="lead-gen-form"
       variant="tertiary"
       size="md"
     />
@@ -274,10 +275,14 @@ const cards = allProperties
   function initCarousel() {
     const sections = document.querySelectorAll<HTMLElement>('.recco-02');
     sections.forEach((section) => {
+      if (section.dataset.carouselInitialized === 'true') return;
+
       const scrollEl = section.querySelector<HTMLElement>('.recco-content-wrapper');
       const prevBtn = section.querySelector<HTMLButtonElement>('.nav-btn--prev');
       const nextBtn = section.querySelector<HTMLButtonElement>('.nav-btn--next');
       if (!scrollEl || !prevBtn || !nextBtn) return;
+
+      section.dataset.carouselInitialized = 'true';
 
       const SCROLL_AMOUNT = 320;
 
@@ -305,7 +310,11 @@ const cards = allProperties
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initCarousel);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel, { once: true });
+  } else {
+    initCarousel();
+  }
 </script>
 </>
 )}
