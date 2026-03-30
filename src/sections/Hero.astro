@@ -2,239 +2,179 @@
 import LibraryTextField from '../components/LibraryTextField';
 import LibraryPhoneField from '../components/LibraryPhoneField';
 import LibraryButton from '../components/LibraryButton';
-import { Image } from 'astro:assets';
 ---
 
 <header class="hero">
-  <div class="hero-wrapper">
-    <section class="hero-content">
-    <div class="titles">
-      <p class="main-title">
-        Premium PG Living.<br />
-        Zero Hassle.
-      </p>
-      <p class="subtitle">
-        Well-designed co-living spaces for professionals. A premium experience focused on comfort, convenience, and value.
-      </p>
+  <div class="hero-inner">
+    <div class="hero-visual" aria-hidden="true">
+      <img src="/images/img_hero.webp" alt="" class="hero-visual-image" />
     </div>
+    <section class="hero-card">
+      <div class="titles">
+        <p class="main-title">
+          Premium PG Living.<br />
+          Zero Hassle.
+        </p>
+        <p class="subtitle">
+          Well-designed co-living spaces for professionals. A premium experience focused on comfort,
+          convenience and value.
+        </p>
+      </div>
 
-    <form id="hero-contact-form" class="contact-form" action="https://contact.oyoassets.com/" method="get">
-      <input type="hidden" name="source" value="hero" />
-      <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired errorMessage="Enter your name" />
-      <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired errorMessage="Enter your preferred city" />
-      <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
-      <LibraryButton
-        client:load
-        label="Book a free visit"
-        variant="primary"
-        size="lg"
-        fullWidth
-        type="submit"
-      />
-    </form>
-  </section>
-
-  <div class="hero-image-wrapper">
-    <div class="hero-image">
-      <Image
-        src="/images/img_hero.webp"
-        alt="PG Stay"
-        class="image"
-        width={600}
-        height={600}
-        loading="eager"
-      />
-    </div>
-  </div>
+      <form id="hero-contact-form" class="contact-form" action="https://contact.oyoassets.com/" method="get">
+        <input type="hidden" name="source" value="hero" />
+        <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired errorMessage="Enter your name" />
+        <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired errorMessage="Enter your preferred city" />
+        <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
+        <LibraryButton
+          client:load
+          label="Get free callback"
+          variant="primary"
+          size="lg"
+          fullWidth
+          type="submit"
+        />
+      </form>
+    </section>
   </div>
 </header>
 
 <style>
   .hero {
-    background: var(--colour-background-intense-brand-invert-primary);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-fixed-md-1, 24px);
-    align-items: center;
-    overflow: clip;
-    padding-bottom: var(--space-scale-md-3, 40px);
-    padding-top: var(--space-fixed-md-1, 24px);
-    padding-left: var(--space-fixed-md-4, 48px);
-    padding-right: var(--space-fixed-md-4, 48px);
-    border-radius: var(--size-border-radius-xl, 16px);
     width: 100%;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-fixed-md-4, 48px) var(--space-fixed-sm-5, 16px);
+    background-image: url('/images/img_hero.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 560px;
   }
 
-  .hero-wrapper {
+  .hero-inner {
+    width: 100%;
     max-width: 1200px;
-    width: 100%;
     display: flex;
-    gap: 48px;
     align-items: center;
-    justify-content: center;
-    position: relative;
   }
 
-  .hero-content {
-    background: var(--colour-background-subtle-neutral-1);
+  .hero-card {
+    width: min(100%, 480px);
+    background: var(--colour-background-subtle-neutral-1, #fff);
+    border-radius: var(--size-border-radius-xxl, 24px);
     display: flex;
-    flex: 1 0 0;
     flex-direction: column;
-    gap: var(--space-fixed-md-1, 24px);
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
-    min-height: 1px;
-    min-width: 1px;
-    overflow: hidden;
-    padding-top: var(--space-fixed-md-4, 48px);
-    position: relative;
-    z-index: 2;
+    gap: var(--space-fixed-sm-5, 16px);
+    padding: var(--space-fixed-md-3, 40px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
   }
 
   .titles {
     display: flex;
     flex-direction: column;
-    gap: var(--space-fixed-sm-5);
-    align-items: flex-start;
-    position: relative;
+    gap: var(--space-fixed-sm-5, 16px);
     width: 100%;
   }
 
   .main-title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    font-weight: 700;
+    margin: 0;
+    color: var(--colour-text-intense-neutral, #282828);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 32px;
+    font-weight: 700;
     line-height: 40px;
     letter-spacing: -0.6px;
-    color: var(--colour-text-intense-neutral);
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0;
   }
 
   .subtitle {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.3px;
-    color: var(--colour-text-moderate-neutral);
-    position: relative;
-    width: 100%;
     margin: 0;
-    padding: 0;
+    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0;
   }
 
   .contact-form {
     display: flex;
+    gap: var(--space-fixed-sm-5, 16px);
     flex-direction: column;
-    gap: var(--space-fixed-sm-5);
-    align-items: stretch;
-    position: relative;
     width: 100%;
   }
 
-  /* astro-island is inline by default — make it block so children can be full width */
-  .contact-form astro-island,
-  .hero-content > astro-island {
+  .contact-form > astro-island {
     display: block;
     width: 100%;
   }
 
-  .hero-image-wrapper {
-    display: flex;
-    flex: 1 0 0;
-    flex-direction: row;
-    align-items: center;
-    align-self: stretch;
+  .hero-visual {
+    display: none;
   }
 
-  .hero-image {
-    flex: 1 0 0;
-    height: 100%;
-    min-height: 1px;
-    min-width: 1px;
-    position: relative;
-    border-radius: var(--size-border-radius-xl);
-    z-index: 1;
-  }
-
-  .image {
-    position: absolute;
-    inset: 0;
-    max-width: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-    border-radius: var(--size-border-radius-xl);
-  }
-
-  @media (max-width: 1024px) {
+  @media (max-width: 900px) {
     .hero {
-      padding-left: var(--space-fixed-md-2, 32px);
-      padding-right: var(--space-fixed-md-2, 32px);
+      min-height: 0;
+      padding-top: var(--space-fixed-md-3, 40px);
+      padding-bottom: var(--space-fixed-md-3, 40px);
+      background: none;
     }
 
-    .hero-wrapper {
+    .hero-inner {
       flex-direction: column;
-      gap: 0;
+      align-items: stretch;
+      gap: var(--space-fixed-sm-3, 8px);
     }
 
-    .hero-content {
-      max-width: 100%;
-      flex: 1 0 auto;
-      min-height: auto;
-      padding-top: var(--space-fixed-md-4, 48px);
-    }
-
-    .hero-image-wrapper {
-      order: -1;
+    .hero-visual {
+      display: block;
       width: 100%;
       min-height: 400px;
+      border-radius: var(--size-border-radius-xl, 16px);
+      overflow: hidden;
     }
-  }
 
-  @media (max-width: 768px) {
-    .hero {
-      padding-left: var(--space-fixed-md-1, 24px);
-      padding-right: var(--space-fixed-md-1, 24px);
+    .hero-visual-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      background: var(--colour-background-subtle-neutral-1, #fff);
+      box-shadow: none;
     }
   }
 
   @media (max-width: 640px) {
     .hero {
+      min-height: 0;
       padding-top: var(--space-fixed-sm-3, 8px);
-      padding-bottom: var(--space-fixed-sm-5, 16px);
-      padding-left: var(--space-fixed-sm-5, 16px);
-      padding-right: var(--space-fixed-sm-5, 16px);
-      gap: var(--space-fixed-sm-3, 8px);
+      padding-bottom: var(--space-fixed-md-1, 24px);
+      background: none;
     }
 
-    .hero-wrapper {
-      flex-direction: column;
-      gap: var(--space-fixed-sm-3, 8px);
-    }
-
-    .hero-image-wrapper {
+    .hero-card {
       width: 100%;
-      min-height: unset;
+      max-width: 400px;
+      padding: var(--space-fixed-sm-5, 16px) 0 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .hero-visual {
+      min-height: 0;
       aspect-ratio: 328 / 218;
     }
 
-    .hero-image {
-      height: 100%;
-    }
-
-    .hero-content {
-      max-width: 100%;
-      padding-top: var(--space-fixed-sm-5, 16px);
-      padding-left: 0;
-      padding-right: 0;
-      gap: var(--space-fixed-sm-5, 16px);
+    .main-title {
+      font-size: 32px;
+      line-height: 40px;
     }
   }
 </style>
