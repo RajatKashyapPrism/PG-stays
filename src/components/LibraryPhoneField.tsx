@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { PhoneField } from '@prism-design-global/components';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
   isReadOnly?: boolean;
   isInvalid?: boolean;
   name?: string;
+  defaultCountryCode?: string;
 }
 
 export default function LibraryPhoneField({
@@ -23,11 +24,21 @@ export default function LibraryPhoneField({
   isReadOnly,
   isInvalid: isInvalidProp,
   name,
+  defaultCountryCode = 'IN',
 }: Props) {
   const hiddenRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [showError, setShowError] = useState(false);
 
   const isInvalid = isInvalidProp || showError;
+
+  useEffect(() => {
+    const countrySelect = wrapperRef.current?.querySelector('select');
+    if (!countrySelect || countrySelect.value === defaultCountryCode) return;
+
+    countrySelect.value = defaultCountryCode;
+    countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
+  }, [defaultCountryCode]);
 
   return (
     <>
@@ -40,6 +51,7 @@ export default function LibraryPhoneField({
       }
     `}</style>
     <div
+      ref={wrapperRef}
       className={`phone-field-wrapper${isInvalid ? ' phone-field-invalid' : ''}`}
       style={{ width: '100%', position: 'relative' }}
       onInput={(e) => {

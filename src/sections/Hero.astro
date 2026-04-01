@@ -1,7 +1,5 @@
 ---
-import LibraryTextField from '../components/LibraryTextField';
 import LibraryPhoneField from '../components/LibraryPhoneField';
-import LibraryButton from '../components/LibraryButton';
 ---
 
 <header class="hero">
@@ -15,25 +13,58 @@ import LibraryButton from '../components/LibraryButton';
           Premium PG Living.<br />
           Zero Hassle.
         </p>
-        <p class="subtitle">
-          Well-designed co-living spaces for professionals. A premium experience focused on comfort,
-          convenience and value.
-        </p>
+
+        <ul class="hero-usps" aria-label="Key benefits">
+          <li class="hero-usp">
+            <span class="hero-usp-icon" aria-hidden="true">
+              <svg viewBox="0 0 10 8" focusable="false">
+                <path d="M1 4.1 3.6 6.7 9 1.3" />
+              </svg>
+            </span>
+            <span>Zero brokerage</span>
+          </li>
+          <li class="hero-usp">
+            <span class="hero-usp-icon" aria-hidden="true">
+              <svg viewBox="0 0 10 8" focusable="false">
+                <path d="M1 4.1 3.6 6.7 9 1.3" />
+              </svg>
+            </span>
+            <span>Move-in within 24 hours</span>
+          </li>
+          <li class="hero-usp">
+            <span class="hero-usp-icon" aria-hidden="true">
+              <svg viewBox="0 0 10 8" focusable="false">
+                <path d="M1 4.1 3.6 6.7 9 1.3" />
+              </svg>
+            </span>
+            <span>5,000+ already living with us</span>
+          </li>
+        </ul>
       </div>
 
       <form id="hero-contact-form" class="contact-form" action="https://contact.oyoassets.com/" method="get">
         <input type="hidden" name="source" value="hero" />
-        <LibraryTextField client:load label="Full name" name="fullName" autoComplete="name" isRequired errorMessage="Enter your name" />
-        <LibraryTextField client:load label="City" name="city" autoComplete="address-level2" isRequired errorMessage="Enter your preferred city" />
-        <LibraryPhoneField client:load label="Mobile number" name="phone" placeholder="Mobile number" isRequired />
-        <LibraryButton
+        <LibraryPhoneField
           client:load
-          label="Get free callback"
-          variant="primary"
-          size="lg"
-          fullWidth
-          type="submit"
+          label="Mobile number"
+          name="phone"
+          placeholder="Enter mobile number"
+          isRequired
         />
+
+        <button class="hero-submit" type="submit">Get PG Options</button>
+
+        <p class="hero-footnote">
+          <span class="hero-footnote-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16" focusable="false">
+              <circle cx="8" cy="8" r="5.75" />
+              <path d="M8 5.1v3.2l2 1.2" />
+              <path d="M8 1.5v1.4" />
+              <path d="M5.2 1.8h5.6" />
+            </svg>
+          </span>
+          <span>No spam. We’ll call you within 5 minutes.</span>
+        </p>
       </form>
     </section>
   </div>
@@ -60,20 +91,26 @@ import LibraryButton from '../components/LibraryButton';
   }
 
   .hero-card {
-    width: min(100%, 480px);
+    width: min(100%, 464px);
     background: var(--colour-background-subtle-neutral-1, #fff);
     border-radius: var(--size-border-radius-xxl, 24px);
     display: flex;
     flex-direction: column;
-    gap: var(--space-fixed-sm-5, 16px);
+    gap: var(--space-scale-md-1, 24px);
     padding: var(--space-fixed-md-3, 40px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 0 4px rgba(0, 0, 0, 0.08),
+      0 5px 10px rgba(0, 0, 0, 0.06),
+      0 18px 18px rgba(0, 0, 0, 0.08),
+      0 41px 24px rgba(0, 0, 0, 0.05),
+      0 72px 29px rgba(0, 0, 0, 0.01),
+      0 113px 32px rgba(0, 0, 0, 0);
   }
 
   .titles {
     display: flex;
     flex-direction: column;
-    gap: var(--space-fixed-sm-5, 16px);
+    gap: var(--space-fixed-md-1, 24px);
     width: 100%;
   }
 
@@ -81,32 +118,122 @@ import LibraryButton from '../components/LibraryButton';
     margin: 0;
     color: var(--colour-text-intense-neutral, #282828);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 700;
-    line-height: 40px;
-    letter-spacing: -0.6px;
+    line-height: 48px;
+    letter-spacing: -1px;
   }
 
-  .subtitle {
+  .hero-usps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-fixed-sm-3, 8px);
     margin: 0;
-    color: var(--colour-text-moderate-neutral, #6c6c6c);
+    padding: 0;
+    list-style: none;
+    color: var(--colour-text-intense-neutral, #282828);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    letter-spacing: 0;
+  }
+
+  .hero-usp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-fixed-sm-2, 4px);
+  }
+
+  .hero-usp-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    align-items: center;
+    justify-content: center;
+    color: var(--colour-text-intense-neutral, #282828);
+  }
+
+  .hero-usp-icon svg {
+    width: 10px;
+    height: 8px;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .contact-form {
     display: flex;
-    gap: var(--space-fixed-sm-5, 16px);
     flex-direction: column;
+    gap: var(--space-fixed-md-1, 24px);
     width: 100%;
   }
 
   .contact-form > astro-island {
     display: block;
     width: 100%;
+  }
+
+  .hero-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 32px;
+    border: 0;
+    border-radius: var(--button-size-border-radius-lg, 12px);
+    background: var(--colour-background-intense-brand-primary, #d61132);
+    color: var(--colour-text-intense-on-intense-brand-primary, #fff);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+
+  .hero-submit:focus-visible,
+  .contact-form :global(input):focus-visible,
+  .contact-form :global(select):focus-visible {
+    outline: 2px solid rgba(214, 17, 50, 0.28);
+    outline-offset: 2px;
+  }
+
+  .hero-footnote {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-fixed-sm-3, 8px);
+    margin: 8px 0 0;
+    width: 100%;
+    color: var(--colour-text-intense-neutral, #282828);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  .hero-footnote-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    align-items: center;
+    justify-content: center;
+    color: var(--colour-text-intense-neutral, #282828);
+    flex-shrink: 0;
+  }
+
+  .hero-footnote-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .hero-visual {
@@ -175,6 +302,12 @@ import LibraryButton from '../components/LibraryButton';
     .main-title {
       font-size: 32px;
       line-height: 40px;
+      letter-spacing: -0.6px;
+    }
+
+    .hero-footnote {
+      justify-content: flex-start;
+      text-align: left;
     }
   }
 </style>

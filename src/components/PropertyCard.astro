@@ -19,6 +19,8 @@ export interface Props {
 const { images, gender, genderType, name, address, price, priority = false } = Astro.props;
 const displayImages = images.slice(0, 5); // Ensure max 5 images
 const imageLoading = priority ? 'eager' : 'lazy';
+const genderIconSrc =
+  genderType === 'female' ? '/icons/gender-female-figma.svg' : '/icons/gender-male-figma.svg';
 ---
 
 <div class="property-card">
@@ -53,19 +55,13 @@ const imageLoading = priority ? 'eager' : 'lazy';
 
     <!-- Gender badge -->
     <div class={`gender-badge gender-badge--${genderType}`}>
-      {genderType === "female" ? (
-        <!-- Female icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="8" r="4" stroke="#282828" stroke-width="1.5" />
-          <path d="M12 12v8M9 17h6" stroke="#282828" stroke-width="1.5" stroke-linecap="round" />
-        </svg>
-      ) : (
-        <!-- Male icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="10" cy="14" r="4" stroke="#282828" stroke-width="1.5" />
-          <path d="M14 10l4-4M14 6h4v4" stroke="#282828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      )}
+      <img
+        src={genderIconSrc}
+        alt=""
+        aria-hidden="true"
+        class={`gender-icon gender-icon--${genderType}`}
+        loading="lazy"
+      />
       <span class="badge-label">{gender}</span>
     </div>
   </div>
@@ -297,6 +293,21 @@ const imageLoading = priority ? 'eager' : 'lazy';
     color: var(--colour-text-intense-neutral);
     white-space: nowrap;
     padding: 0 var(--fixed-50);
+  }
+
+  .gender-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .gender-icon--female {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gender-icon--male {
+    width: 16px;
+    height: 16px;
   }
 
   /* ── Card body ── */
