@@ -1,5 +1,6 @@
 ---
 import LibraryPhoneField from '../components/LibraryPhoneField';
+import LibraryButton from '../components/LibraryButton';
 ---
 
 <header class="hero">
@@ -52,7 +53,14 @@ import LibraryPhoneField from '../components/LibraryPhoneField';
           isRequired
         />
 
-        <button class="hero-submit" type="submit">Get PG Options</button>
+        <LibraryButton
+          client:load
+          label="Get PG options"
+          variant="primary"
+          size="lg"
+          fullWidth
+          type="submit"
+        />
 
         <p class="hero-footnote">
           <span class="hero-footnote-icon" aria-hidden="true">
@@ -173,32 +181,6 @@ import LibraryPhoneField from '../components/LibraryPhoneField';
   .contact-form > astro-island {
     display: block;
     width: 100%;
-  }
-
-  .hero-submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 48px;
-    padding: 12px 32px;
-    border: 0;
-    border-radius: var(--button-size-border-radius-lg, 12px);
-    background: var(--colour-background-intense-brand-primary, #d61132);
-    color: var(--colour-text-intense-on-intense-brand-primary, #fff);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0;
-    cursor: pointer;
-  }
-
-  .hero-submit:focus-visible,
-  .contact-form :global(input):focus-visible,
-  .contact-form :global(select):focus-visible {
-    outline: 2px solid rgba(214, 17, 50, 0.28);
-    outline-offset: 2px;
   }
 
   .hero-footnote {

@@ -12,6 +12,7 @@ interface Props {
   isInvalid?: boolean;
   name?: string;
   defaultCountryCode?: string;
+  lockCountryCode?: boolean;
 }
 
 export default function LibraryPhoneField({
@@ -25,6 +26,7 @@ export default function LibraryPhoneField({
   isInvalid: isInvalidProp,
   name,
   defaultCountryCode = 'IN',
+  lockCountryCode = true,
 }: Props) {
   const hiddenRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -34,11 +36,28 @@ export default function LibraryPhoneField({
 
   useEffect(() => {
     const countrySelect = wrapperRef.current?.querySelector('select');
-    if (!countrySelect || countrySelect.value === defaultCountryCode) return;
+    if (!countrySelect) return;
 
-    countrySelect.value = defaultCountryCode;
-    countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
-  }, [defaultCountryCode]);
+    if (countrySelect.value !== defaultCountryCode) {
+      countrySelect.value = defaultCountryCode;
+      countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    if (lockCountryCode) {
+      countrySelect.disabled = true;
+      countrySelect.tabIndex = -1;
+      countrySelect.setAttribute('aria-disabled', 'true');
+      countrySelect.style.opacity = '1';
+      countrySelect.style.cursor = 'default';
+      return;
+    }
+
+    countrySelect.disabled = false;
+    countrySelect.removeAttribute('aria-disabled');
+    countrySelect.removeAttribute('tabindex');
+    countrySelect.style.opacity = '';
+    countrySelect.style.cursor = '';
+  }, [defaultCountryCode, lockCountryCode]);
 
   return (
     <>
@@ -49,10 +68,16 @@ export default function LibraryPhoneField({
       .phone-field-invalid label {
         color: var(--colour-text-intense-negative);
       }
+      .phone-field-country-locked select {
+        pointer-events: none;
+      }
+      .phone-field-country-locked [class*="countryChevron"] {
+        display: none;
+      }
     `}</style>
     <div
       ref={wrapperRef}
-      className={`phone-field-wrapper${isInvalid ? ' phone-field-invalid' : ''}`}
+      className={`phone-field-wrapper${isInvalid ? ' phone-field-invalid' : ''}${lockCountryCode ? ' phone-field-country-locked' : ''}`}
       style={{ width: '100%', position: 'relative' }}
       onInput={(e) => {
         const v = (e.target as HTMLInputElement).value ?? '';
